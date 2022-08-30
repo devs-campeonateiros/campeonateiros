@@ -1,6 +1,6 @@
 import axios from "axios";
 
 export const api = axios.create({
-  baseURL: "",
-  timeout: 3000,
+    baseURL: "https://database-campeonateiros.herokuapp.com/",
+    timeout: 3000,
 });
