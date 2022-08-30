@@ -1,0 +1,62 @@
+{
+  "users": [
+    {
+      "email": "higor@kenzie.com",
+      "password": "$2a$10$1yak2vwsO2XTyMshwCkpBONT5X3Qr1KsJGWmYd9k6NlwFx9TyVdZy",
+      "name": "Higor",
+      "age": 26,
+      "id": 1
+    },
+    {
+      "email": "higor@email.com",
+      "password": "$2a$10$oCwW9./EJc.q8SGfmUqEMeZ48R3FtQ3oYV1g2KmcY8az/xshcfera",
+      "name": "Higor",
+      "age": 26,
+      "id": 2
+    },
+    {
+      "email": "campeonateiros@email.com",
+      "password": "$2a$10$MzJIXuy/aVtI3Z9hOs.zb.rgvdCk7Wn/Ozm3vtD46dUCko.T/2R4u",
+      "name": "Kenzinho",
+      "age": 25,
+      "id": 3
+    }
+  ],
+  "events": [
+    {
+      "category": "FUTEBOL",
+      "userId": 2,
+      "name": "Torneio da Galera",
+      "localization": "Ginásio Nazareno - Palhoça/sc",
+      "date": "30/08/2022",
+      "image": "",
+      "awards": [],
+      "information": [],
+      "id": 1
+    },
+    {
+      "category": "Fut7",
+      "userId": 2,
+      "name": "Champeos league",
+      "localization": "Ginásio - Palhoça/sc",
+      "date": "30/08/2022",
+      "image": "",
+      "awards": [],
+      "information": [],
+      "id": 2
+    },
+    {
+      "category": "Fut7",
+      "userId": 2,
+      "name": "Champeos league",
+      "localization": "Ginásio - Palhoça/sc",
+      "date": "30/08/2022",
+      "image": "",
+      "awards": [],
+      "information": [],
+      "id": 3
+    }
+  ],
+  "invite": [],
+  "accept": []
+}
