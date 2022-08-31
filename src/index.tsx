@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import GlobalStyle from "./Global/global";
-import { GlobalContext } from "./context/GlobalContext";
+import { GlobalProvider } from "./context/GlobalContext";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 
@@ -10,11 +10,11 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
-        <GlobalContext>
+        <GlobalProvider>
             <BrowserRouter>
                 <GlobalStyle />
                 <App />
             </BrowserRouter>
-        </GlobalContext>
+        </GlobalProvider>
     </React.StrictMode>
 );
