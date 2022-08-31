@@ -5,6 +5,7 @@ interface IAuthProviderProps {
 }
 interface IGlobalContext {
     user: IUser;
+    setUser: React.Dispatch<React.SetStateAction<IUser>>;
 }
 
 interface IUser {
@@ -19,7 +20,7 @@ export const GlobalContext = createContext<IGlobalContext>(
 export const GlobalProvider = ({ children }: IAuthProviderProps) => {
     const [user, setUser] = useState<IUser>({} as IUser);
     return (
-        <GlobalContext.Provider value={{ user }}>
+        <GlobalContext.Provider value={{ user, setUser }}>
             {children}
         </GlobalContext.Provider>
     );
