@@ -2,7 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
-import SimpleHeader from "../components/simpleHeader";
+
 
 
 export const RoutesMain = () => {

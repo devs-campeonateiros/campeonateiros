@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ContainerLogin, Header } from "./styles";
+import { ContainerLogin } from "./styles";
 import { api } from "../../services/Api";
 import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import SimpleHeader from "../../components/simpleHeader";
+
 
 interface IUserDate {
     email: string;
@@ -66,9 +68,7 @@ const Login = () => {
 
     return (
         <>
-        <Header>
-            
-        </Header>
+        <SimpleHeader/>
         <ContainerLogin>
             
             <div className="container">
@@ -82,7 +82,7 @@ const Login = () => {
                     />
                     <span>{errors.email && errors.email.message}</span>
 
-                    <label htmlFor="password">Password</label>
+                    <label htmlFor="password">Senha:</label>
                     <input
                         type="password"
                         placeholder="Digite sua senha"
@@ -95,7 +95,7 @@ const Login = () => {
                 </form>
                 <div className="register">
                     <span>Ainda não possui uma conta?</span>
-                    <button onClick={onHandleClick}>Cadastrar</button>
+                    <button className="cadastrar" onClick={onHandleClick}>Cadastrar</button>
                 </div>
             </div>
         </ContainerLogin>
