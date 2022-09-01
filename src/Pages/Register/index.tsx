@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import * as yup from "yup";
+import SimpleHeader from "../../components/simpleHeader";
+
 import { api } from "../../services/Api";
 import { ContainerRegister } from "./styles";
 
@@ -63,6 +65,9 @@ const Register = () => {
 
     return (
         <ContainerRegister>
+            <SimpleHeader/>
+
+            
             <div className="container">
                 <form onSubmit={handleSubmit(onHandleSubmit)}>
                     <label htmlFor="name">Nome do Time:</label>
