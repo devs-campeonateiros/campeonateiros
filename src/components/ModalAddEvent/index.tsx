@@ -9,8 +9,12 @@ const schema = yup.object({
     localization: yup.string().required("Campo obrigatório"),
     "date-start": yup
         .date()
-        .max(new Date().toLocaleDateString())
-        .required("Campo obrigatório"),
+        .min(new Date(), "Por Favor escolha uma data futura")
+        .typeError("Data de inicio é obrigatório"),
+    "date-end": yup
+        .date()
+        .min(yup.ref("startDate"), "End date must be grater than start date")
+        .typeError("End Date is Required"),
 });
 
 interface IEvent {
