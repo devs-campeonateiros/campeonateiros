@@ -13,8 +13,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
     <React.StrictMode>
-        <GlobalProvider>
-            <BrowserRouter>
+        <BrowserRouter>
+            <GlobalProvider>
                 <GlobalStyle />
                 <App />
                 <ToastContainer/>
