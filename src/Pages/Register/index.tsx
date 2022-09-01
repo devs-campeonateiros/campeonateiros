@@ -1,25 +1,25 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
 import SimpleHeader from "../../components/simpleHeader";
+import { GlobalContext } from "../../context/GlobalContext";
 
-import { api } from "../../services/Api";
 import { ContainerRegister } from "./styles";
 
-interface IData {
+interface IDataRegister {
     name: string;
     email: string;
     city: string;
     password: string;
     confirm_password: string;
+    id?: Number;
 }
 
 const Register = () => {
-    
-    const navigate = useNavigate()
-    
+    const { registerUser } = useContext(GlobalContext);
+
     const registerSchema = yup.object().shape({
         name: yup.string().required("Time Obrigatório"),
         email: yup
@@ -43,33 +43,16 @@ const Register = () => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<IData>({
+    } = useForm<IDataRegister>({
         resolver: yupResolver(registerSchema),
     });
 
-    function onHandleSubmit(data: IData) {
-        console.log("o data é" ,data);
-
-        api.post("register", data).then((res)=>{
-            console.log("resposta", res)
-
-            toast.success("Conta criada com sucesso!")
-
-            navigate('/login')
-
-        })
-        .catch(()=>{
-            toast.error('Algo deu errado!')
-        })
-    }
-
     return (
         <ContainerRegister>
-            <SimpleHeader/>
+            <SimpleHeader />
 
-            
             <div className="container">
-                <form onSubmit={handleSubmit(onHandleSubmit)}>
+                <form onSubmit={handleSubmit(registerUser)}>
                     <label htmlFor="name">Nome do Time:</label>
                     <input
                         type="text"
