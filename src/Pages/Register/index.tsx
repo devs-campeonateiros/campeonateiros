@@ -1,23 +1,19 @@
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import * as yup from "yup";
-import { api } from "../../services/Api";
+import SimpleHeader from "../../components/simpleHeader";
+import { GlobalContext, IUser } from "../../context/GlobalContext";
 import { ContainerRegister } from "./styles";
 
-interface IData {
-    name: string;
-    email: string;
-    city: string;
-    password: string;
-    confirm_password: string;
-}
+
 
 const Register = () => {
-    
-    const navigate = useNavigate()
-    
+
+    const { registerUser } = useContext(GlobalContext);
+
+
     const registerSchema = yup.object().shape({
         name: yup.string().required("Time Obrigatório"),
         email: yup
@@ -41,85 +37,78 @@ const Register = () => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<IData>({
+    } = useForm<IUser>({
         resolver: yupResolver(registerSchema),
     });
 
-    function onHandleSubmit(data: IData) {
-        console.log("o data é" ,data);
-
-        api.post("register", data).then((res)=>{
-            console.log("resposta", res)
-
-            toast.success("Conta criada com sucesso!")
-
-            navigate('/login')
-
-        })
-        .catch(()=>{
-            toast.error('Algo deu errado!')
-        })
-    }
 
     return (
-        <ContainerRegister>
-            <div className="container">
-                <form onSubmit={handleSubmit(onHandleSubmit)}>
-                    <label htmlFor="name">Nome do Time:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        placeholder="Clube de Regatas Flamengo"
-                        {...register("name")}
-                    />
-                    {errors.name && <span>{errors.name.message}</span>}
+        <>
+            <SimpleHeader />
+            <ContainerRegister>
+                <div className="container">
+                    <h2>Cadastre-se</h2>
+                    <form onSubmit={handleSubmit(registerUser)}>
+                        <label htmlFor="name">Nome do Time:</label>
+                        <input
+                            type="text"
+                            id="name"
+                            placeholder="Clube de Regatas Flamengo"
+                            {...register("name")}
+                        />
+                        {errors.name && <span>{errors.name.message}</span>}
 
-                    <label htmlFor="email">E-mail:</label>
-                    <input
-                        type="text"
-                        id="email"
-                        placeholder="flamengo@crf.com"
-                        {...register("email")}
-                    />
-                    {errors.email && <span>{errors.email.message}</span>}
+                        <label htmlFor="email">E-mail:</label>
+                        <input
+                            type="text"
+                            id="email"
+                            placeholder="flamengo@crf.com"
+                            {...register("email")}
+                        />
+                        {errors.email && <span>{errors.email.message}</span>}
 
-                    <label htmlFor="city">Cidade:</label>
-                    <input
-                        type="text"
-                        id="city"
-                        placeholder="Rio de Janeiro"
-                        {...register("city")}
-                    />
-                    {errors.city && <span>{errors.city.message}</span>}
+                        <label htmlFor="city">Cidade:</label>
+                        <input
+                            type="text"
+                            id="city"
+                            placeholder="Rio de Janeiro"
+                            {...register("city")}
+                        />
+                        {errors.city && <span>{errors.city.message}</span>}
 
-                    <label htmlFor="password">Senha:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        placeholder="********"
-                        {...register("password")}
-                    />
-                    {errors.password && <span>{errors.password.message}</span>}
+                        <label htmlFor="password">Senha:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            placeholder="********"
+                            {...register("password")}
+                        />
+                        {errors.password && (
+                            <span>{errors.password.message}</span>
+                        )}
 
-                    <label htmlFor="confirm_password">Confirmar Senha:</label>
-                    <input
-                        type="password"
-                        id="confirm_password"
-                        placeholder="********"
-                        {...register("confirm_password")}
-                    />
-                    {errors.confirm_password && (
-                        <span>{errors.confirm_password.message}</span>
-                    )}
+                        <label htmlFor="confirm_password">
+                            Confirmar Senha:
+                        </label>
+                        <input
+                            type="password"
+                            id="confirm_password"
+                            placeholder="********"
+                            {...register("confirm_password")}
+                        />
+                        {errors.confirm_password && (
+                            <span>{errors.confirm_password.message}</span>
+                        )}
 
-                    <button type="submit">Criar conta</button>
-                </form>
-                <div className="register">
-                    <span>Já possuiu uma conta?</span>
-                    <Link to={"/login"}>Logar</Link>
+                        <button type="submit">Criar conta</button>
+                    </form>
+                    <div className="login">
+                        <span>Já possuiu uma conta?</span>
+                        <Link to={"/login"}>Logar</Link>
+                    </div>
                 </div>
-            </div>
-        </ContainerRegister>
+            </ContainerRegister>
+        </>
     );
 };
 export default Register;

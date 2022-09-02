@@ -12,28 +12,23 @@ export default createGlobalStyle`
   body,html{
     width: 100vw;
     height: 100vh;
-  }
+    }
 
   body {
-    background: var(--color-background);
     color: var(--color-text);
     -webkit-font-smoothing: antialiased;
 
-    overflow-x: hidden;
   }
 
   body, input, button, textarea {
-    font-family: 'Roboto';
-    font-size: 1.6rem;
+    font-family: 'Poppins';
   }
 
   button {
     cursor: pointer;
   }
 
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
+
 
   ::-webkit-scrollbar-track {
     background: var(--color-text-light);
@@ -49,7 +44,5 @@ export default createGlobalStyle`
   ::-webkit-scrollbar-thumb:hover {
     background: var(--color-primary);
   }
-  .App {
-    background-color: black;
-  }
+ 
 `;

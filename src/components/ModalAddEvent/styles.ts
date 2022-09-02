@@ -10,7 +10,6 @@ export const DivModal = styled.div`
     margin: 0;
     padding: 0;
 
-    background-color: rgba(0, 0, 0, 0.8);
 `;
 export const DivInter = styled.div`
     display: flex;
