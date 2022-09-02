@@ -8,6 +8,7 @@ export const ContainerRegister = styled.div`
     height: 100vh;
     background-color: white;
 
+
     .container {
         width: 310px;
         background-color: #ff7d00;

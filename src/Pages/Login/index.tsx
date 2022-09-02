@@ -9,9 +9,11 @@ import SimpleHeader from "../../components/simpleHeader";
 
 
 const Login = () => {
+
   const navigate = useNavigate();
 
   const { loginUser } = useContext(GlobalContext);
+
 
   const loginSchema = yup.object().shape({
     email: yup
@@ -28,6 +30,7 @@ const Login = () => {
   } = useForm<IUserLogin>({
     resolver: yupResolver(loginSchema),
   });
+
 
   function onHandleClick() {
     navigate("/register");

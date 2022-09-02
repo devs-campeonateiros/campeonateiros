@@ -13,7 +13,6 @@ const Register = () => {
 
     const { registerUser } = useContext(GlobalContext);
 
-
     const registerSchema = yup.object().shape({
         name: yup.string().required("Time Obrigatório"),
         email: yup
@@ -37,6 +36,7 @@ const Register = () => {
         register,
         handleSubmit,
         formState: { errors },
+
     } = useForm<IUser>({
         resolver: yupResolver(registerSchema),
     });

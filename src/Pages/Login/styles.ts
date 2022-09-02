@@ -12,7 +12,6 @@ export const ContainerLogin = styled.div`
         width: 310px;
         background-color: #ff7d00;
         height: 450px;
-
         display: flex;
         flex-direction: column;
         align-items: center;
