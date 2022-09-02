@@ -24,6 +24,11 @@ export const DivInter = styled.div`
     border: 3px solid #ff7d00;
     box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
     border-radius: 15px;
+
+    @media (max-width: 768px) {
+        width: 18rem;
+        height: 30rem;
+    }
 `;
 
 export const Divheader = styled.div`
@@ -90,15 +95,36 @@ export const FormEvent = styled.form`
     label {
         margin-left: 5px;
     }
+
+    @media (max-width: 768px) {
+        font-size: 16px;
+        gap: 2px;
+        align-items: center;
+        label {
+            margin-left: 1.1rem;
+            align-self: flex-start;
+        }
+        input {
+            width: 16rem;
+        }
+    }
+`;
+export const DivBtt = styled.div`
+    display: flex;
+    justify-content: space-around;
+
+    width: 18rem;
+
     button {
         align-self: center;
         border: none;
-        width: 10rem;
+        width: 6rem;
         height: 2rem;
 
         margin-top: 10px;
         background: #333333;
         border-radius: 100px;
+        font-size: 12px;
 
         color: white;
         font-size: 20px;

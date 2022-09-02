@@ -1,4 +1,4 @@
-import { DivModal, DivInter, Divheader, FormEvent } from "./styles";
+import { DivModal, DivInter, Divheader, FormEvent, DivBtt } from "./styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -70,7 +70,10 @@ export const ModalEditEvent = () => {
                         placeholder="Insira os times que irão participar"
                         {...register("teams")}
                     />
-                    <button type="submit">Editar</button>
+                    <DivBtt>
+                        <button type="submit">Editar</button>
+                        <button onClick={() => {}}>Excluir</button>
+                    </DivBtt>
                 </FormEvent>
             </DivInter>
         </DivModal>
