@@ -31,7 +31,7 @@ interface IGlobalContext {
 }
 
 interface IUser {
-    id?: Number;
+    id?: number;
     name: string;
     password?: string;
     confirm_password?: string;
@@ -48,7 +48,7 @@ interface IUserLogin {
 
 export interface IEvent {
     category: string;
-    userId?: Number;
+    userId?: number;
     name: string;
     localization: string;
     "date-start": Date;
@@ -56,7 +56,7 @@ export interface IEvent {
     image?: string;
     informations?: Object[];
     teams?: string[];
-    id?: Number;
+    id?: number;
 }
 
 export const GlobalContext = createContext<IGlobalContext>(
