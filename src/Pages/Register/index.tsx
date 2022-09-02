@@ -14,7 +14,7 @@ interface IDataRegister {
     city: string;
     password: string;
     confirm_password: string;
-    id?: Number;
+    id?: number;
 }
 
 const Register = () => {

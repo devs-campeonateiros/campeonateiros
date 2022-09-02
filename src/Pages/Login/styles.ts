@@ -5,10 +5,7 @@ export const ContainerLogin = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    height: 100%;
-    background-color: white;
-    
-
+    min-height: 100vh;
     form {
         display: flex;
         justify-content: space-around;
@@ -22,8 +19,7 @@ export const ContainerLogin = styled.div`
     .container {
         width: 300px;
         background-color: yellow;
-        height: 430px;
-
+        height: 450px;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -48,13 +44,14 @@ export const ContainerLogin = styled.div`
     .register {
         display: flex;
         flex-direction: column;
-        height: 120px;
+        height: 150px;
         justify-content: center;
         align-items: center;
     }
-    .cadastrar{
-        width: 100px;
-    }
 `;
 
-
+export const Header = styled.header`
+    background-color: black;
+    width: 100vw;
+    height: 50px;
+`;
