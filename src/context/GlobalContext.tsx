@@ -4,6 +4,7 @@ import React, {
     useState,
     Dispatch,
     SetStateAction,
+    useEffect,
 } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -18,7 +19,6 @@ interface IGlobalContext {
     setUser: Dispatch<SetStateAction<IUser>>;
     event: IEvent;
     setEvent: Dispatch<SetStateAction<IEvent>>;
-    events: IEvent[];
     registerUser(data: IUser): void;
     loginUser(data: IUserLogin): void;
     listUsers(): void;
@@ -31,12 +31,14 @@ interface IGlobalContext {
 }
 
 interface IUser {
-    id: string;
+    id?: Number;
     name: string;
+    password?: string;
+    confirm_password?: string;
     email: string;
     city: string;
-    players: undefined | string[];
-    url_image: undefined | string;
+    players?: string[];
+    url_image?: string;
 }
 
 interface IUserLogin {
@@ -46,15 +48,15 @@ interface IUserLogin {
 
 export interface IEvent {
     category: string;
-    userId: string;
+    userId?: Number;
     name: string;
     localization: string;
-    "date-start": string;
-    "date-end": string;
-    image: undefined | string;
-    informations: undefined | Object[];
-    teams: undefined | string[];
-    id: string;
+    "date-start": Date;
+    "date-end": Date;
+    image?: string;
+    informations?: Object[];
+    teams?: string[];
+    id?: Number;
 }
 
 export const GlobalContext = createContext<IGlobalContext>(
@@ -70,8 +72,17 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
     const navigate = useNavigate();
     const token = window.localStorage.getItem("@Campeonateiros-token");
 
+    useEffect(() => {
+        const userId = window.localStorage.getItem("@Campeonateiros-id");
+
+        if (userId !== null) {
+            listUsers();
+            listEvents();
+        }
+    }, [user]);
+
     function registerUser(data: IUser) {
-        api.post("register", data)
+        api.post("/register", data)
             .then((res) => {
                 toast.success("Conta criada com sucesso!");
                 navigate("/login");
@@ -104,20 +115,28 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
     }
 
     function createEvent(data: IEvent) {
-        api.post("events", data, {
+        const userId = window.localStorage.getItem("@Campeonateiros-id");
+        const dataEvent = { ...data, userId };
+
+        api.post("/events", dataEvent, {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((res) => {
-                toast.success("Evento criado com sucesso!");
+                toast.success("Evento criado com sucesso!", {
+                    theme: "dark",
+                });
                 // direcionar para a pág do Evento
             })
             .catch((err) => {
-                toast.error("Ocorreu algum problema!");
+                toast.error("Algo deu errado!", {
+                    theme: "dark",
+                });
+                console.log(err);
             });
     }
 
     function listUsers() {
-        api.get("users")
+        api.get("/users")
             .then((res) => {
                 setUsers(res.data);
             })
@@ -133,11 +152,13 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
     }
 
     function editEvent(data: IEvent) {
-        api.patch(`events/${data.id}`, data, {
+        api.patch(`/events/${event.id}`, data, {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((res) => {
-                toast.success("Evento atualizado!!");
+                toast.success("Evento atualizado!!", {
+                    theme: "dark",
+                });
                 setEvent(res.data);
             })
             .catch((err) => {
@@ -146,7 +167,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
     }
 
     function editUser(data: IUser) {
-        api.patch(`users/${data.id}`, data, {
+        api.patch(`/users/${user.id}`, data, {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((res) => {
@@ -159,11 +180,13 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
     }
 
     function deleteEvent() {
-        api.delete(`events/${event.id}`, {
+        api.delete(`/events/${event.id}`, {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then(() => {
-                toast.success("Evento deletado!");
+                toast.success("Evento deletado!", {
+                    theme: "dark",
+                });
                 setEvents(events.filter((elem) => elem.id !== event.id));
             })
             .catch(() => {
@@ -172,16 +195,18 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
     }
 
     function deleteUser() {
-        api.delete(`users/${user.id}`, {
+        api.delete(`/users/${user.id}`, {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then(() => {
                 toast.success("Usuário deletado!");
-                setUsers(users.filter((elem) => elem.id !== event.id));
+                setUsers(users.filter((elem) => elem.id !== user.id));
                 window.localStorage.clear();
             })
             .catch(() => {
-                toast.error("Algo deu errado!");
+                toast.error("Algo deu errado!", {
+                    theme: "dark",
+                });
             });
     }
 
@@ -192,7 +217,6 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
                 setUser,
                 event,
                 setEvent,
-                events,
                 registerUser,
                 loginUser,
                 listUsers,
