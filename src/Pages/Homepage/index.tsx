@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import SimpleHeader from "../../components/simpleHeader";
+import HeaderHomepage from "../../components/HeaderHomepage";
 import { IEvent } from "../../context/GlobalContext";
 import { api } from "../../services/Api";
 import { Container } from "./styles";
@@ -15,7 +15,7 @@ const Homepage = () => {
 
     return (
         <>
-            <SimpleHeader />
+            <HeaderHomepage />
 
             <Container>
                 <div className="mainHomepage">

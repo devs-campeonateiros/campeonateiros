@@ -16,7 +16,7 @@ export const Container = styled.div`
         }
     }
     .imgHomepage {
-        margin-top: 30px;
+        margin-top: 10px;
         width: 100%;
         height: 30vh;
         @media (min-width: 712px) {
