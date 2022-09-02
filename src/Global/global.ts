@@ -28,7 +28,12 @@ export default createGlobalStyle`
   }
 
   button {
+    text-align: center;
     cursor: pointer;
+  }
+
+  li {
+    list-style: none;
   }
 
   ::-webkit-scrollbar {
@@ -48,8 +53,5 @@ export default createGlobalStyle`
 
   ::-webkit-scrollbar-thumb:hover {
     background: var(--color-primary);
-  }
-  .App {
-    background-color: black;
   }
 `;

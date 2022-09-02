@@ -2,8 +2,7 @@ import { DivModal, DivInter, Divheader, FormEvent } from "./styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useContext } from "react";
-import { GlobalContext } from "../../context/GlobalContext";
+import userEvent from "@testing-library/user-event";
 
 const schema = yup.object({
     name: yup.string().required("Campo obrigatório"),
@@ -14,17 +13,17 @@ const schema = yup.object({
         .typeError("Data de inicio é obrigatório"),
     "date-end": yup
         .date()
-        .min(yup.ref("date-start"), "End date must be grater than start date")
+        .min(yup.ref("startDate"), "End date must be grater than start date")
         .typeError("End Date is Required"),
 });
 
-interface IEventRegister {
+interface IEvent {
     category: string;
     userId?: number;
     name: string;
     localization: string;
-    "date-start": Date;
-    "date-end": Date;
+    "date-start": string;
+    "date-end": string;
 }
 
 export const ModalAddEvent = () => {
@@ -32,11 +31,9 @@ export const ModalAddEvent = () => {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<IEventRegister>({
+    } = useForm<IEvent>({
         resolver: yupResolver(schema),
     });
-
-    const { createEvent } = useContext(GlobalContext);
 
     return (
         <DivModal>
@@ -48,14 +45,18 @@ export const ModalAddEvent = () => {
                     </button>
                 </Divheader>
 
-                <FormEvent onSubmit={handleSubmit(createEvent)}>
+                <FormEvent onSubmit={() => {}}>
                     <p>Modalidade</p>
-                    <select id="categoria" {...register("category")}>
+                    <select id="category" {...register("category")}>
                         <option value="Futebol">Futebol</option>
                         <option value="Voleibol">Voleibol</option>
                         <option value="Basquete">Basquete</option>
                     </select>
-
+                    <input
+                        value={"user.id"}
+                        id="userId"
+                        {...register("userId")}
+                    />
                     <label htmlFor="name">Nome do evento</label>
                     <input
                         type="text"
@@ -74,15 +75,15 @@ export const ModalAddEvent = () => {
                     <p>{errors.localization?.message}</p>
                     <label htmlFor="date-start">Inicio do evento</label>
                     <input
-                        type="date"
+                        type="text"
                         id="date-start"
                         placeholder="Insira a data inicial do evento!"
                         {...register("date-start")}
                     />
-                    <label htmlFor="date-end">Fim do evento</label>
+                    <label htmlFor="localization">Fim do evento</label>
                     <input
-                        type="date"
-                        id="date-end"
+                        type="text"
+                        id="localization"
                         placeholder="Insira a data final do evento"
                         {...register("date-end")}
                     />
