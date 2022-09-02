@@ -13,10 +13,6 @@ const Homepage = () => {
         });
     }, []);
 
-    function teste() {
-        console.log("teste");
-    }
-
     return (
         <>
             <SimpleHeader />

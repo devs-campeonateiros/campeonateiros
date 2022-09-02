@@ -73,11 +73,15 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
     function registerUser(data: IUser) {
         api.post("register", data)
             .then((res) => {
-                toast.success("Conta criada com sucesso!");
+                toast.success("Conta criada com sucesso!", {
+                    theme: "dark",
+                });
                 navigate("/login");
             })
             .catch(() => {
-                toast.error("Algo deu errado!");
+                toast.error("Algo deu errado!", {
+                    theme: "dark",
+                });
             });
     }
 
@@ -108,11 +112,15 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((res) => {
-                toast.success("Evento criado com sucesso!");
+                toast.success("Evento criado com sucesso!", {
+                    theme: "dark",
+                });
                 // direcionar para a pág do Evento
             })
             .catch((err) => {
-                toast.error("Ocorreu algum problema!");
+                toast.error("Ocorreu algum problema!", {
+                    theme: "dark",
+                });
             });
     }
 
@@ -137,11 +145,15 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((res) => {
-                toast.success("Evento atualizado!!");
+                toast.success("Evento atualizado!!", {
+                    theme: "dark",
+                });
                 setEvent(res.data);
             })
             .catch((err) => {
-                toast.error("Algo deu errado...");
+                toast.error("Algo deu errado...", {
+                    theme: "dark",
+                });
             });
     }
 
@@ -150,11 +162,15 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then((res) => {
-                toast.success("Evento atualizado!!");
+                toast.success("Evento atualizado!!", {
+                    theme: "dark",
+                });
                 setUser(res.data);
             })
             .catch((err) => {
-                toast.error("Algo deu errado...");
+                toast.error("Algo deu errado...", {
+                    theme: "dark",
+                });
             });
     }
 
@@ -163,11 +179,15 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then(() => {
-                toast.success("Evento deletado!");
+                toast.success("Evento deletado!", {
+                    theme: "dark",
+                });
                 setEvents(events.filter((elem) => elem.id !== event.id));
             })
             .catch(() => {
-                toast.error("Algo deu errado!");
+                toast.error("Algo deu errado!", {
+                    theme: "dark",
+                });
             });
     }
 
@@ -176,12 +196,16 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
             headers: { Authorization: `Bearer ${token}` },
         })
             .then(() => {
-                toast.success("Usuário deletado!");
+                toast.success("Usuário deletado!", {
+                    theme: "dark",
+                });
                 setUsers(users.filter((elem) => elem.id !== event.id));
                 window.localStorage.clear();
             })
             .catch(() => {
-                toast.error("Algo deu errado!");
+                toast.error("Algo deu errado!", {
+                    theme: "dark",
+                });
             });
     }
 

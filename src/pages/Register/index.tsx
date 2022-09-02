@@ -15,9 +15,8 @@ interface IData {
 }
 
 const Register = () => {
-    
-    const navigate = useNavigate()
-    
+    const navigate = useNavigate();
+
     const registerSchema = yup.object().shape({
         name: yup.string().required("Time Obrigatório"),
         email: yup
@@ -46,19 +45,19 @@ const Register = () => {
     });
 
     function onHandleSubmit(data: IData) {
-        console.log("o data é" ,data);
+        console.log("o data é", data);
 
-        api.post("register", data).then((res)=>{
-            console.log("resposta", res)
+        api.post("register", data)
+            .then((res) => {
+                console.log("resposta", res);
 
-            toast.success("Conta criada com sucesso!")
+                toast.success("Conta criada com sucesso!");
 
-            navigate('/login')
-
-        })
-        .catch(()=>{
-            toast.error('Algo deu errado!')
-        })
+                navigate("/login");
+            })
+            .catch(() => {
+                toast.error("Algo deu errado!");
+            });
     }
 
     return (
