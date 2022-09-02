@@ -20,7 +20,7 @@ const schema = yup.object({
 
 interface IEventRegister {
     category: string;
-    userId?: number;
+    userId: number;
     name: string;
     localization: string;
     "date-start": Date;
