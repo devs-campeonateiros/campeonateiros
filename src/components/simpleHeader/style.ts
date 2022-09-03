@@ -1,27 +1,25 @@
 import styled from "styled-components";
 
 export const Header = styled.header`
-    width: 100%;
-    height: 3.5rem;
+    height: 4rem;
 
     display: flex;
     justify-content: center;
     align-items: center;
-
-    border-radius: 8px 0px 0px 8px;
-    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.8);
 `;
 export const DivLogo = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 20px;
 
     height: 100%;
     width: 100%;
-    border: #ffffff 2px white;
+    border-bottom: #ff7d00 8px solid;
 
     img {
-        display: none;
+        width: 53px;
     }
     h1 {
         font-size: 18px;
@@ -30,7 +28,9 @@ export const DivLogo = styled.div`
     @media (min-width: 768px) {
         img {
             display: flex;
-            width: 40px;
+            width: 45px;
+            margin: 10px;
         }
     }
 `;
+

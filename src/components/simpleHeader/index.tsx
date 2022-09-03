@@ -1,5 +1,5 @@
 import { Header, DivLogo } from "./style";
-import logo from "./logo.png";
+import logo from "../../assets/logo.png";
 
 const SimpleHeader = () => {
     return (
@@ -12,3 +12,4 @@ const SimpleHeader = () => {
     );
 };
 export default SimpleHeader;
+

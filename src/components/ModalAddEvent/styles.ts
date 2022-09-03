@@ -9,8 +9,6 @@ export const DivModal = styled.div`
     height: 100vh;
     margin: 0;
     padding: 0;
-
-    background-color: rgba(0, 0, 0, 0.8);
 `;
 export const DivInter = styled.div`
     display: flex;
@@ -104,3 +102,4 @@ export const FormEvent = styled.form`
         font-size: 20px;
     }
 `;
+

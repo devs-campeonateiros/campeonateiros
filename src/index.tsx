@@ -16,8 +16,20 @@ root.render(
             <GlobalProvider>
                 <GlobalStyle />
                 <App />
-                <ToastContainer />
+                <ToastContainer
+                    theme="dark"
+                    position="top-right"
+                    autoClose={2000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                />
             </GlobalProvider>
         </BrowserRouter>
     </React.StrictMode>
 );
+
