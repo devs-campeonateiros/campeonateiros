@@ -6,7 +6,7 @@ import * as yup from "yup";
 const schema = yup.object({
     quantidade: yup.number().required("Deve ser um numero"),
 });
-/*  <p>{errors.quantidade?.message}</p> */
+
 export const ModalEditEvent = () => {
     const {
         register,

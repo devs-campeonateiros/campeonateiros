@@ -46,7 +46,7 @@ export const ContainerLogin = styled.div`
             font-size: 1rem;
             padding-left: 15px;
         }
-        span{
+        span {
             font-size: 14px;
             font-weight: 700;
             color: red;
@@ -81,3 +81,4 @@ export const ContainerLogin = styled.div`
         }
     }
 `;
+

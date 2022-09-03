@@ -93,25 +93,29 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
     }
 
     function loginUser(data: IUserLogin) {
-        api
-        .post("login", data)
+        api.post("login", data)
             .then((res) => {
-                
                 const { user: userResponse, accessToken: token } = res.data;
-                
+
                 window.localStorage.clear();
                 window.localStorage.setItem("@Campeonateiros-token", token);
-                window.localStorage.setItem("@Campeonateiros-id", JSON.stringify(userResponse.id));
-                window.localStorage.setItem("@Campeonateiros-user", JSON.stringify(userResponse.name));
+                window.localStorage.setItem(
+                    "@Campeonateiros-id",
+                    JSON.stringify(userResponse.id)
+                );
+                window.localStorage.setItem(
+                    "@Campeonateiros-user",
+                    JSON.stringify(userResponse.name)
+                );
                 setUser(res.data.user);
                 api.defaults.headers.common.authorization = `Bearer ${token}`;
                 toast.success("Login Feito com sucesso!");
                 navigate("/home");
             })
             .catch((err) => {
-                console.log(err)
-                toast.error("Algo errado!")}
-            );
+                console.log(err);
+                toast.error("Algo errado!");
+            });
     }
 
     function createEvent(data: IEvent) {
@@ -232,3 +236,4 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         </GlobalContext.Provider>
     );
 };
+

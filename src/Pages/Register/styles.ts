@@ -8,7 +8,6 @@ export const ContainerRegister = styled.div`
     height: 100vh;
     background-color: white;
 
-
     .container {
         width: 310px;
         background-color: #ff7d00;
@@ -34,13 +33,11 @@ export const ContainerRegister = styled.div`
             justify-content: center;
             font-size: 2rem;
             padding: 10px;
-            
         }
 
         label {
             font-size: 1rem;
             margin-bottom: 8px;
-
         }
 
         input {
@@ -53,7 +50,7 @@ export const ContainerRegister = styled.div`
             padding-left: 15px;
             margin-bottom: 10px;
         }
-        span{
+        span {
             font-size: 14px;
             color: red;
             font-weight: 700;
@@ -90,5 +87,5 @@ export const ContainerRegister = styled.div`
             font-size: 1.6rem;
         }
     }
-
 `;
+

@@ -2,15 +2,14 @@ import { Header, DivLogo } from "./style";
 import logo from "../../assets/logo.png";
 
 const SimpleHeader = () => {
-  return (
-    <Header>
-      <DivLogo>
-        
-          <img src={logo} alt="Logo" />
-          <h1>League of Campeonateiros</h1>
-    
-      </DivLogo>
-    </Header>
-  );
+    return (
+        <Header>
+            <DivLogo>
+                <img src={logo} alt="Logo" />
+                <h1>League of Campeonateiros</h1>
+            </DivLogo>
+        </Header>
+    );
 };
 export default SimpleHeader;
+
