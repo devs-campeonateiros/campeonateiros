@@ -25,13 +25,23 @@ interface IGlobalContext {
   listEvents(): void;
   createEvent(data: IEvent): void;
   editEvent(data: IEditEvent): void;
-  editUser(data: IUser): void;
+  editUser(data: IEditUser): void;
   deleteEvent(): void;
   deleteUser(): void;
   addEvent: boolean;
   setAddEvent: React.Dispatch<React.SetStateAction<boolean>>;
   editEventModal: boolean;
   setEditEvent: React.Dispatch<React.SetStateAction<boolean>>;
+  editUserModal: boolean;
+  setEditUserModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface IEditUser {
+  email: string;
+  name: string;
+  city: string;
+  players?: string[];
+  url_image: string;
 }
 
 export interface IUser {
@@ -49,6 +59,7 @@ export interface IUserLogin {
   email: string;
   password: string;
 }
+
 export interface IEditEvent {
   image: string;
   inscricao: string;
@@ -57,6 +68,7 @@ export interface IEditEvent {
   localizacao: string;
   teams: string[];
 }
+
 export interface IEvent {
   category: string;
   userId?: number;
@@ -81,6 +93,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
   const [events, setEvents] = useState<IEvent[]>({} as IEvent[]);
   const [addEvent, setAddEvent] = useState(false);
   const [editEventModal, setEditEvent] = useState(false);
+  const [editUserModal, setEditUserModal] = useState(false);
 
   const navigate = useNavigate();
   const token = window.localStorage.getItem("@Campeonateiros-token");
@@ -189,7 +202,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
       });
   }
 
-  function editUser(data: IUser) {
+  function editUser(data: IEditUser) {
     api
       .patch(`/users/${user.id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
@@ -257,6 +270,8 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         setAddEvent,
         editEventModal,
         setEditEvent,
+        editUserModal,
+        setEditUserModal,
       }}
     >
       {children}
