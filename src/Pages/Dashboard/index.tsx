@@ -1,10 +1,14 @@
 import CompleteHeader from "../../components/CompleteHeader";
 import Container from "./styles";
+import { useContext } from "react";
+import { GlobalContext } from "../../context/GlobalContext";
 import { FaUserCircle } from "react-icons/fa";
 import ney from "../../assets/ney.png";
 
 const Dashboard = () => {
   const user = JSON.parse(localStorage.getItem("@Campeonateiros-user") || "");
+
+  const { setAddEvent, setEditEvent, deleteEvent } = useContext(GlobalContext);
 
   return (
     <>
@@ -22,7 +26,14 @@ const Dashboard = () => {
           <div className="divButtons">
             <button>MEUS EVENTOS</button>
             <button>EVENTOS QUE TENHO INTERESSE</button>
-            <button className="addEvent">Criar Campeonato</button>
+            <button
+              className="addEvent"
+              onClick={() => {
+                setAddEvent(true);
+              }}
+            >
+              Criar Campeonato
+            </button>
           </div>
         </div>
         <div className="divButtons">
@@ -47,8 +58,22 @@ const Dashboard = () => {
           </div>
           <div className="buttonsCard">
             <button className="infoEvent">Ver Evento</button>
-            <button className="btnEdit">Editar</button>
-            <button className="btnDel">Excluir</button>
+            <button
+              className="btnEdit"
+              onClick={() => {
+                setEditEvent(true);
+              }}
+            >
+              Editar
+            </button>
+            <button
+              className="btnDel"
+              onClick={() => {
+                deleteEvent();
+              }}
+            >
+              Excluir
+            </button>
           </div>
         </div>
       </Container>
