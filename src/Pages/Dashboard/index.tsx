@@ -1,10 +1,23 @@
 import CompleteHeader from "../../components/CompleteHeader";
 import Container from "./styles";
+import { useContext } from "react";
+import { GlobalContext } from "../../context/GlobalContext";
 import { FaUserCircle } from "react-icons/fa";
 import ney from "../../assets/ney.png";
+import { ModalEditUser } from "../../components/ModalEditUser";
+import { ModalEditEvent } from "../../components/ModalEditEvent";
+import { ModalAddEvent } from "../../components/ModalAddEvent";
 
 const Dashboard = () => {
-  const user = JSON.parse(localStorage.getItem("@Campeonateiros-user") || "");
+  const {
+    user,
+    setAddEvent,
+    setEditEvent,
+    deleteEvent,
+    addEvent,
+    editEventModal,
+    editUserModal,
+  } = useContext(GlobalContext);
 
   return (
     <>
@@ -12,17 +25,29 @@ const Dashboard = () => {
       <Container>
         <div className="userIndice">
           <div className="divUser">
-            <span>
-              <FaUserCircle />
-            </span>
+            {user.url_image ? (
+              <img src={user.url_image} alt={user.name} />
+            ) : (
+              <span>
+                <FaUserCircle />
+              </span>
+            )}
             <h2>
-              <span className="userSaudation">Olá!</span> {user}
+              <span className="userSaudation">Olá!</span>
+              {user.name}
             </h2>
           </div>
           <div className="divButtons">
             <button>MEUS EVENTOS</button>
             <button>EVENTOS QUE TENHO INTERESSE</button>
-            <button className="addEvent">Criar Campeonato</button>
+            <button
+              className="addEvent"
+              onClick={() => {
+                setAddEvent(true);
+              }}
+            >
+              Criar Campeonato
+            </button>
           </div>
         </div>
         <div className="divButtons">
@@ -47,10 +72,28 @@ const Dashboard = () => {
           </div>
           <div className="buttonsCard">
             <button className="infoEvent">Ver Evento</button>
-            <button className="btnEdit">Editar</button>
-            <button className="btnDel">Excluir</button>
+            <button
+              className="btnEdit"
+              onClick={() => {
+                setEditEvent(true);
+              }}
+            >
+              Editar
+            </button>
+            <button
+              className="btnDel"
+              onClick={() => {
+                deleteEvent();
+              }}
+            >
+              Excluir
+            </button>
           </div>
         </div>
+
+        {editUserModal && <ModalEditUser />}
+        {editEventModal && <ModalEditEvent />}
+        {addEvent && <ModalAddEvent />}
       </Container>
     </>
   );
