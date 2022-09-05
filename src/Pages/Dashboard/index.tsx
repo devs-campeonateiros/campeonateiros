@@ -4,11 +4,20 @@ import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 import { FaUserCircle } from "react-icons/fa";
 import ney from "../../assets/ney.png";
+import { ModalEditUser } from "../../components/ModalEditUser";
+import { ModalEditEvent } from "../../components/ModalEditEvent";
+import { ModalAddEvent } from "../../components/ModalAddEvent";
 
 const Dashboard = () => {
-  const user = JSON.parse(localStorage.getItem("@Campeonateiros-user") || "");
-
-  const { setAddEvent, setEditEvent, deleteEvent } = useContext(GlobalContext);
+  const {
+    user,
+    setAddEvent,
+    setEditEvent,
+    deleteEvent,
+    addEvent,
+    editEventModal,
+    editUserModal,
+  } = useContext(GlobalContext);
 
   return (
     <>
@@ -16,11 +25,16 @@ const Dashboard = () => {
       <Container>
         <div className="userIndice">
           <div className="divUser">
-            <span>
-              <FaUserCircle />
-            </span>
+            {user.url_image ? (
+              <img src={user.url_image} alt={user.name} />
+            ) : (
+              <span>
+                <FaUserCircle />
+              </span>
+            )}
             <h2>
-              <span className="userSaudation">Olá!</span> {user}
+              <span className="userSaudation">Olá!</span>
+              {user.name}
             </h2>
           </div>
           <div className="divButtons">
@@ -76,6 +90,10 @@ const Dashboard = () => {
             </button>
           </div>
         </div>
+
+        {editUserModal && <ModalEditUser />}
+        {editEventModal && <ModalEditEvent />}
+        {addEvent && <ModalAddEvent />}
       </Container>
     </>
   );

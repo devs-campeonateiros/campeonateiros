@@ -97,6 +97,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
 
   const navigate = useNavigate();
   const token = window.localStorage.getItem("@Campeonateiros-token");
+  const userId = window.localStorage.getItem("@Campeonateiros-id");
 
   useEffect(() => {
     const userId = window.localStorage.getItem("@Campeonateiros-id");
@@ -104,8 +105,9 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
     if (userId !== null) {
       listUsers();
       listEvents();
+      listUser();
     }
-  }, [user]);
+  }, []);
 
   function registerUser(data: IUser) {
     api
@@ -131,10 +133,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
           "@Campeonateiros-id",
           JSON.stringify(userResponse.id)
         );
-        window.localStorage.setItem(
-          "@Campeonateiros-user",
-          JSON.stringify(userResponse.name)
-        );
+
         setUser(res.data.user);
         api.defaults.headers.common.authorization = `Bearer ${token}`;
         toast.success("Login Feito com sucesso!");
@@ -177,6 +176,15 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
       .catch((err) => console.log(err));
   }
 
+  function listUser() {
+    api
+      .get(`/users/${userId}`)
+      .then((res) => {
+        setUser(res.data);
+      })
+      .catch((err) => console.log(err));
+  }
+
   function listEvents() {
     api
       .get("events")
@@ -210,6 +218,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
       .then((res) => {
         toast.success("Evento atualizado!!");
         setUser(res.data);
+        listUser();
       })
       .catch((err) => {
         toast.error("Algo deu errado...");
