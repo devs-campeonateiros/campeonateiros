@@ -68,7 +68,7 @@ export const ContainerRegister = styled.div`
         }
     }
 
-    .login {
+    .register {
         display: flex;
         flex-direction: column;
         height: 150px;

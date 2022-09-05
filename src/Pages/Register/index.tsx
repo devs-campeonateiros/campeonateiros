@@ -4,18 +4,9 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
 import SimpleHeader from "../../components/simpleHeader";
-import { GlobalContext } from "../../context/GlobalContext";
-
+import { GlobalContext, IUser } from "../../context/GlobalContext";
 import { ContainerRegister } from "./styles";
 
-interface IDataRegister {
-  name: string;
-  email: string;
-  city: string;
-  password: string;
-  confirm_password: string;
-  id: string;
-}
 
 const Register = () => {
   const { registerUser } = useContext(GlobalContext);
@@ -40,15 +31,18 @@ const Register = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IDataRegister>({
+  } = useForm<IUser>({
     resolver: yupResolver(registerSchema),
   });
 
   return (
+    <>
+    <SimpleHeader />
     <ContainerRegister>
-      <SimpleHeader />
 
       <div className="container">
+      <h2>Cadastre-se</h2>
+
         <form onSubmit={handleSubmit(registerUser)}>
           <label htmlFor="name">Nome do Time:</label>
           <input
@@ -105,6 +99,7 @@ const Register = () => {
         </div>
       </div>
     </ContainerRegister>
+    </>
   );
 };
 export default Register;
