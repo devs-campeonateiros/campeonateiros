@@ -2,13 +2,15 @@ import styled from "styled-components";
 
 export const DivModal = styled.div`
   display: flex;
-  justify-content: center;
+  position: fixed;
   align-items: center;
+  justify-content: center;
 
   width: 100vw;
   height: 100vh;
-  margin: 0;
-  padding: 0;
+  left: 0;
+  top: 0;
+  z-index: 1;
 
   background-color: rgba(0, 0, 0, 0.8);
 `;
@@ -39,8 +41,8 @@ export const Divheader = styled.div`
   border-bottom: solid 6px rgba(255, 125, 0, 0.95);
   margin-bottom: 1rem;
   h2 {
-    font-weight: 700;
-    font-size: 24px;
+    font-weight: 500;
+    font-size: 22px;
     line-height: 38px;
     color: #ffffff;
   }

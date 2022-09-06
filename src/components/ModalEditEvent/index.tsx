@@ -30,7 +30,7 @@ export const ModalEditEvent = () => {
     <DivModal>
       <DivInter>
         <Divheader>
-          <h2>Atualizando {event.name} </h2>
+          <h2>Edit: {event.name} </h2>
           <button
             type="button"
             onClick={() => {
