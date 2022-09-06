@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { IEvent } from "../../context/GlobalContext";
+import { IEvent } from "../../context/GlobalInterfaces";
 import { api } from "../../services/Api";
 import { Container } from "./styles";
 import fut from "../../assets/fut.png";

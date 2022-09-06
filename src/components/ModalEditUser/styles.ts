@@ -9,13 +9,15 @@ export const DivModal = styled.div`
   height: 100vh;
   margin: 0;
   padding: 0;
+
+  background-color: rgba(0, 0, 0, 0.8);
 `;
 export const DivInter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  width: 20rem;
+  width: 18rem;
   height: 32rem;
 
   background: #fefefe;
@@ -56,7 +58,7 @@ export const FormEvent = styled.form`
   justify-content: center;
   align-items: flex-start;
 
-  gap: 5px;
+  gap: 6px;
   font-weight: 500;
   font-size: 18px;
   color: black;
@@ -64,19 +66,8 @@ export const FormEvent = styled.form`
   p {
     margin-left: 5px;
   }
-  select {
-    width: 18rem;
-    height: 2rem;
-    padding-left: 2px;
-
-    border: 1.5px solid #ff7d00;
-    border-radius: 5px;
-  }
-  #userId {
-    display: none;
-  }
   input {
-    width: 18rem;
+    width: 16rem;
     height: 2.2rem;
 
     background: #ffffff;

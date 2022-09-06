@@ -1,10 +1,12 @@
+import { useContext } from "react";
+import { FaUserCircle } from "react-icons/fa";
+
 import { Header, DivLogo } from "./style";
 import logo from "../../assets/logo.png";
-import userImg from "../../assets/userImg.png"
+import { GlobalContext } from "../../context/GlobalContext";
 
 const CompleteHeader = () => {
-
-    const user = JSON.parse(localStorage.getItem("@Campeonateiros-user") || "");
+  const { user, setEditUserModal } = useContext(GlobalContext);
 
   return (
     <Header>
@@ -14,11 +16,16 @@ const CompleteHeader = () => {
           <h1>League of Campeonateiros</h1>
         </div>
         <div className="divOptions">
-          <ul>
-            <li>Jogador</li>
-            <li>Organizador</li>
-          </ul>
-          <button><img src={userImg} alt="" />{user}</button>
+          <button onClick={() => setEditUserModal(true)}>
+            {user.url_image ? (
+              <img src={user.url_image} alt={user.name} />
+            ) : (
+              <span>
+                <FaUserCircle />
+              </span>
+            )}
+            {user.name}
+          </button>
         </div>
       </DivLogo>
     </Header>

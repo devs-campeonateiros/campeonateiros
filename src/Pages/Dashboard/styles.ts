@@ -11,12 +11,21 @@ const Container = styled.div`
     .divUser {
       display: flex;
       align-items: center;
+      margin-top: 0.1rem;
+
+      img {
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        border: 1px solid #ff7d00;
+      }
 
       span {
         font-size: 5rem;
         color: #b3adad;
         padding: 20px;
       }
+
       .userSaudation {
         color: #ff7d00;
         font-size: inherit;
@@ -67,19 +76,18 @@ const Container = styled.div`
         font-weight: 500;
         width: 305px;
       }
-    
     }
-    
-      .buttonsCard{
-        display: flex;
-        flex-direction: column;
-        gap: 20px;
-        margin-left: 50px;
-        button{
-          background: none;
-          border: none;
-        }
-        .infoEvent {
+
+    .buttonsCard {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-left: 50px;
+      button {
+        background: none;
+        border: none;
+      }
+      .infoEvent {
         background-color: #ff7d00;
         color: #fff;
         padding: 15px;
@@ -88,19 +96,17 @@ const Container = styled.div`
         height: 55px;
         font-size: 1rem;
       }
-      .btnEdit{
+      .btnEdit {
         font-size: 1rem;
         color: grey;
         font-weight: 500;
-
       }
-      .btnDel{
+      .btnDel {
         font-size: 1rem;
-        color: #FF3E3E;
+        color: #ff3e3e;
         font-weight: 500;
-
       }
-      }
+    }
   }
 `;
 
