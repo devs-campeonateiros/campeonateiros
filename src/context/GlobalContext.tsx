@@ -1,86 +1,17 @@
-import React, {
-  createContext,
-  ReactNode,
-  useState,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-} from "react";
+import React, { createContext, ReactNode, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
 import { api } from "../services/Api";
-
-interface IAuthProviderProps {
-  children: ReactNode;
-}
-interface IGlobalContext {
-  user: IUser;
-  setUser: Dispatch<SetStateAction<IUser>>;
-  event: IEvent;
-  setEvent: Dispatch<SetStateAction<IEvent>>;
-  registerUser(data: IUser): void;
-  loginUser(data: IUserLogin): void;
-  listUsers(): void;
-  listEvents(): void;
-  createEvent(data: IEvent): void;
-  editEvent(data: IEditEvent): void;
-  editUser(data: IEditUser): void;
-  deleteEvent(): void;
-  deleteUser(): void;
-  addEvent: boolean;
-  setAddEvent: React.Dispatch<React.SetStateAction<boolean>>;
-  editEventModal: boolean;
-  setEditEvent: React.Dispatch<React.SetStateAction<boolean>>;
-  editUserModal: boolean;
-  setEditUserModal: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export interface IEditUser {
-  email: string;
-  name: string;
-  city: string;
-  players?: string[];
-  url_image: string;
-}
-
-export interface IUser {
-  id: string;
-  name: string;
-  password?: string;
-  confirm_password?: string;
-  email: string;
-  city: string;
-  players?: string[];
-  url_image?: string;
-}
-
-export interface IUserLogin {
-  email: string;
-  password: string;
-}
-
-export interface IEditEvent {
-  image: string;
-  inscricao: string;
-  premiacoes: string;
-  quantidade: number;
-  localizacao: string;
-  teams: string[];
-}
-
-export interface IEvent {
-  category: string;
-  userId?: number;
-  name: string;
-  localization: string;
-  "date-start": Date;
-  "date-end": Date;
-  image?: string;
-  informations?: Object[];
-  teams?: string[];
-  id?: number;
-}
+import {
+  IAuthProviderProps,
+  IGlobalContext,
+  IEditUser,
+  IUser,
+  IUserLogin,
+  IEditEvent,
+  IEvent,
+} from "./GlobalInterfaces";
 
 export const GlobalContext = createContext<IGlobalContext>(
   {} as IGlobalContext
@@ -92,7 +23,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
   const [users, setUsers] = useState<IUser[]>({} as IUser[]);
   const [events, setEvents] = useState<IEvent[]>({} as IEvent[]);
   const [addEvent, setAddEvent] = useState(false);
-  const [editEventModal, setEditEvent] = useState(false);
+  const [editEventModal, setEditEventModal] = useState(false);
   const [editUserModal, setEditUserModal] = useState(false);
 
   const navigate = useNavigate();
@@ -149,6 +80,8 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
     const userId = window.localStorage.getItem("@Campeonateiros-id");
     const dataEvent = { ...data, userId };
 
+    console.log(dataEvent);
+
     api
       .post("/events", dataEvent, {
         headers: { Authorization: `Bearer ${token}` },
@@ -157,6 +90,8 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         toast.success("Evento criado com sucesso!", {
           theme: "dark",
         });
+
+        setAddEvent(!addEvent);
         // direcionar para a pág do Evento
       })
       .catch((err) => {
@@ -204,6 +139,8 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
           theme: "dark",
         });
         setEvent(res.data);
+        listEvents();
+        setEditEventModal(!editEventModal);
       })
       .catch((err) => {
         toast.error("Algo deu errado...");
@@ -219,6 +156,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         toast.success("Evento atualizado!!");
         setUser(res.data);
         listUser();
+        setEditUserModal(!editUserModal);
       })
       .catch((err) => {
         toast.error("Algo deu errado...");
@@ -235,6 +173,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
           theme: "dark",
         });
         setEvents(events.filter((elem) => elem.id !== event.id));
+        setEditEventModal(!editEventModal);
       })
       .catch(() => {
         toast.error("Algo deu errado!");
@@ -251,6 +190,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         toast.success("Usuário deletado!");
         setUsers(users.filter((elem) => elem.id !== user.id));
         window.localStorage.clear();
+        setEditUserModal(!editUserModal);
       })
       .catch(() => {
         toast.error("Algo deu errado!", {
@@ -265,6 +205,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         user,
         setUser,
         event,
+        events,
         setEvent,
         registerUser,
         loginUser,
@@ -278,7 +219,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         addEvent,
         setAddEvent,
         editEventModal,
-        setEditEvent,
+        setEditEventModal,
         editUserModal,
         setEditUserModal,
       }}

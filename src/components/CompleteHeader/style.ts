@@ -53,6 +53,13 @@ export const DivLogo = styled.div`
   img {
     width: 45px;
   }
+  span {
+    svg {
+      width: 35px;
+      height: 35px;
+    }
+  }
+
   h1 {
     font-size: 18px;
     color: #ffffff;
