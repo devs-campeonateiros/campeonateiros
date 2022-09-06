@@ -16,13 +16,9 @@ const CompleteHeader = () => {
           <h1>League of Campeonateiros</h1>
         </div>
         <div className="divOptions">
-          {/* <ul>
-            <li>Jogador</li>
-            <li>Organizador</li>
-          </ul> */}
           <button onClick={() => setEditUserModal(true)}>
             {user.url_image ? (
-              <img src={user.url_image} alt="aa" />
+              <img src={user.url_image} alt={user.name} />
             ) : (
               <span>
                 <FaUserCircle />

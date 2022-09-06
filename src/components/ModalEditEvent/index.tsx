@@ -8,12 +8,20 @@ import { GlobalContext } from "../../context/GlobalContext";
 import { IEditEvent } from "../../context/GlobalInterfaces";
 
 export const ModalEditEvent = () => {
+  const schema = yup.object({
+    image: yup.string().required("Qual a URL da imagem?"),
+    subscription: yup.string().required("Inscrição obrigatório"),
+    awards: yup.string().required("Premiações obrigatório"),
+    quantify: yup.string().required("quantidade obrigatório"),
+    adress: yup.string().required("Endereço obrigatório"),
+  });
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IEditEvent>({
-    // resolver: yupResolver(),
+    resolver: yupResolver(schema),
   });
 
   const { setEditEventModal, editEvent, event, deleteEvent } =

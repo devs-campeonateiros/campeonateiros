@@ -28,11 +28,13 @@ export interface IGlobalContext {
 }
 
 export interface IEditUser {
-  email: string;
-  name: string;
-  city: string;
+  id?: string;
+  name?: string;
+  password?: string;
+  email?: string;
+  city?: string;
   players?: string;
-  url_image: string;
+  url_image?: string;
 }
 
 export interface IUser {
@@ -52,17 +54,24 @@ export interface IUserLogin {
 }
 
 export interface IEditEvent {
+  category?: string;
+  userId?: string;
+  name?: string;
+  localization?: string;
+  dateStart?: string;
+  dateEnd?: string;
   image?: string;
-  subscription: string;
-  awards: string;
-  quantity: number;
-  address: string;
+  subscription?: string;
+  awards?: string;
+  quantity?: number;
+  address?: string;
   teams?: IUserEvent[];
+  id?: string;
 }
 
 export interface IEvent {
   category: string;
-  userId?: string;
+  userId: string;
   name: string;
   localization: string;
   dateStart: string;
@@ -73,7 +82,7 @@ export interface IEvent {
   quantity?: number;
   address?: string;
   teams?: IUserEvent[];
-  id?: number;
+  id?: string;
 }
 
 interface IUserEvent {

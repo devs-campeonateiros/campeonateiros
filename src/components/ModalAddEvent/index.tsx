@@ -15,14 +15,14 @@ const schema = yup.object({
     .min(new Date(), "Por Favor escolha uma data futura")
     .typeError("Data de inicio é obrigatório")
     .transform(function (value) {
-      return value.toLocaleDateString();
+      return value.toLocaleDateString("en-GB");
     }),
   dateEnd: yup
     .date()
     .min(yup.ref("date-start"), "End date must be grater than start date")
     .typeError("End Date is Required")
     .transform(function (value) {
-      return value.toLocaleDateString();
+      return value.toLocaleDateString("en-GB");
     }),
 });
 
