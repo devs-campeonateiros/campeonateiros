@@ -11,6 +11,7 @@ import { ModalEditUser } from "../../components/ModalEditUser";
 import { ModalEditEvent } from "../../components/ModalEditEvent";
 import { ModalAddEvent } from "../../components/ModalAddEvent";
 import { api } from "../../services/Api";
+import { ModalConfirmDelete } from "../../components/ModalConfirmDelete";
 
 const Dashboard = () => {
   const {
@@ -19,10 +20,11 @@ const Dashboard = () => {
     setEvent,
     setAddEvent,
     setEditEventModal,
-    deleteEvent,
     addEvent,
     editEventModal,
     editUserModal,
+    modalConfirmDelete,
+    setModalConfirmDelete,
   } = useContext(GlobalContext);
 
   const [myEventsList, setMyEventsList] = useState<IEvent[]>([]);
@@ -36,10 +38,14 @@ const Dashboard = () => {
       navigate("*", { replace: true });
     }
 
+    atualizandoEvents();
+  }, [editEventModal, addEvent, modalConfirmDelete]);
+
+  function atualizandoEvents() {
     api.get("/events").then((response) => {
       setMyEventsList(response.data);
     });
-  }, [editEventModal]);
+  }
 
   return (
     <>
@@ -115,7 +121,8 @@ const Dashboard = () => {
               <button
                 className="btnDel"
                 onClick={() => {
-                  deleteEvent();
+                  setEvent(event);
+                  setModalConfirmDelete(!modalConfirmDelete);
                 }}
               >
                 Excluir
@@ -127,6 +134,7 @@ const Dashboard = () => {
         {editUserModal && <ModalEditUser />}
         {editEventModal && <ModalEditEvent />}
         {addEvent && <ModalAddEvent />}
+        {modalConfirmDelete && <ModalConfirmDelete />}
       </Container>
     </>
   );

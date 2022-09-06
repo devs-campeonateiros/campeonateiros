@@ -10,20 +10,8 @@ import { IEventRegister } from "./interface";
 const schema = yup.object({
   name: yup.string().required("Qual o nome do evento?"),
   localization: yup.string().required("Qual localização?"),
-  dateStart: yup
-    .date()
-    .min(new Date(), "Por Favor escolha uma data futura")
-    .typeError("Data de inicio é obrigatório")
-    .transform(function (value) {
-      return value.toLocaleDateString("en-GB");
-    }),
-  dateEnd: yup
-    .date()
-    .min(yup.ref("date-start"), "End date must be grater than start date")
-    .typeError("End Date is Required")
-    .transform(function (value) {
-      return value.toLocaleDateString("en-GB");
-    }),
+  dateStart: yup.string().typeError("Data de inicio é obrigatório!"),
+  dateEnd: yup.string().typeError("Fim do evento é obrigatório!"),
 });
 
 
@@ -56,7 +44,7 @@ export const ModalAddEvent = () => {
 
         <FormEvent onSubmit={handleSubmit(createEvent)}>
           <p>Modalidade</p>
-          <select id="categoria" {...register("category")}>
+          <select id="category" {...register("category")}>
             <option value="Futebol">Futebol</option>
             <option value="Voleibol">Voleibol</option>
             <option value="Basquete">Basquete</option>
@@ -78,6 +66,7 @@ export const ModalAddEvent = () => {
             {...register("localization")}
           />
           <p>{errors.localization?.message}</p>
+
           <label htmlFor="dateStart">Inicio do evento</label>
           <input
             type="date"

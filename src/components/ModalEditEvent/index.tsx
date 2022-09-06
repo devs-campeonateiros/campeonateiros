@@ -9,10 +9,11 @@ import { IEditEvent } from "../../context/GlobalInterfaces";
 
 export const ModalEditEvent = () => {
   const schema = yup.object({
+    name: yup.string().required("Qual o nome do evento?"),
     image: yup.string().required("Qual a URL da imagem?"),
     subscription: yup.string().required("Inscrição obrigatório"),
     awards: yup.string().required("Premiações obrigatório"),
-    quantify: yup.string().required("quantidade obrigatório"),
+    quantity: yup.string().required("Limite de quantos participantes?"),
     adress: yup.string().required("Endereço obrigatório"),
   });
 
@@ -20,11 +21,9 @@ export const ModalEditEvent = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IEditEvent>({
-    resolver: yupResolver(schema),
-  });
+  } = useForm<IEditEvent>({});
 
-  const { setEditEventModal, editEvent, event, deleteEvent } =
+  const { setEditEventModal, editEvent, event, setModalConfirmDelete } =
     useContext(GlobalContext);
 
   return (
@@ -43,6 +42,13 @@ export const ModalEditEvent = () => {
         </Divheader>
 
         <FormEvent onSubmit={handleSubmit(editEvent)}>
+          <label htmlFor="name">Nome</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Qual o nome do evento?"
+            {...register("name")}
+          />
           <label htmlFor="image">Imagem</label>
           <input
             type="text"
@@ -50,6 +56,7 @@ export const ModalEditEvent = () => {
             placeholder="Insira uma imagem para seu evento!"
             {...register("image")}
           />
+
           <label htmlFor="subscription">Valor da inscrição</label>
           <input
             type="text"
@@ -83,7 +90,7 @@ export const ModalEditEvent = () => {
             <button
               type="button"
               onClick={() => {
-                deleteEvent();
+                setModalConfirmDelete(true);
               }}
             >
               Excluir

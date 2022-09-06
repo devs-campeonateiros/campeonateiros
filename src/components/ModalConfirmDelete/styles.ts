@@ -2,15 +2,15 @@ import styled from "styled-components";
 
 export const DivModal = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  width: 100vw;
   height: 100vh;
-  margin: 0;
-  padding: 0;
+  width: 100vw;
+  position: absolute;
+  left: 0;
+  top: 0;
   z-index: 1;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.5);
+  align-items: center;
+  justify-content: center;
 `;
 
 export const DivInter = styled.div`
