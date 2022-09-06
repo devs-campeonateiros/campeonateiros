@@ -1,13 +1,11 @@
 import { DivModal, DivInter, Divheader, FormEvent, DivBtt } from "./styles";
 import { useForm } from "react-hook-form";
-import { useContext } from "react";
-import { GlobalContext, IEditEvent } from "../../context/GlobalContext";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useContext } from "react";
 
-const schema = yup.object({
-  quantidade: yup.number().required("Deve ser um numero"),
-});
+import { GlobalContext } from "../../context/GlobalContext";
+import { IEditEvent } from "../../context/GlobalInterfaces";
 
 export const ModalEditEvent = () => {
   const {
@@ -15,31 +13,28 @@ export const ModalEditEvent = () => {
     handleSubmit,
     formState: { errors },
   } = useForm<IEditEvent>({
-    resolver: yupResolver(schema),
+    // resolver: yupResolver(),
   });
 
-  const { setEditEvent, editEvent } = useContext(GlobalContext);
+  const { setEditEventModal, editEvent, event, deleteEvent } =
+    useContext(GlobalContext);
 
   return (
     <DivModal>
       <DivInter>
         <Divheader>
-          <h2>Adicione um evento</h2>
+          <h2>Atualizando {event.name} </h2>
           <button
             type="button"
             onClick={() => {
-              setEditEvent(false);
+              setEditEventModal(false);
             }}
           >
             X
           </button>
         </Divheader>
 
-        <FormEvent
-          onSubmit={() => {
-            handleSubmit(editEvent);
-          }}
-        >
+        <FormEvent onSubmit={handleSubmit(editEvent)}>
           <label htmlFor="image">Imagem</label>
           <input
             type="text"
@@ -47,45 +42,44 @@ export const ModalEditEvent = () => {
             placeholder="Insira uma imagem para seu evento!"
             {...register("image")}
           />
-          <label htmlFor="inscricao">Valor da inscrição</label>
+          <label htmlFor="subscription">Valor da inscrição</label>
           <input
             type="text"
-            id="inscricao"
+            id="subscription"
             placeholder="Insira o valor de inscrição!"
-            {...register("inscricao")}
+            {...register("subscription")}
           />
-          <label htmlFor="premiacoes">Premiações</label>
+          <label htmlFor="awards">Premiações</label>
           <input
             type="text"
-            id="premiacoes"
+            id="awards"
             placeholder="Insira as premiações do evento!"
-            {...register("premiacoes")}
+            {...register("awards")}
           />
-          <label htmlFor="quantidade">Quantidade</label>
+          <label htmlFor="quantity">Quantidade</label>
           <input
             type="number"
-            id="quantidade"
+            id="quantity"
             placeholder="Insira a quantidade máxima de times!"
-            {...register("quantidade")}
+            {...register("quantity")}
           />
-
-          <label htmlFor="localizacao">Localização</label>
+          <label htmlFor="address">Endereço</label>
           <input
             type="text"
-            id="localizacao"
+            id="address"
             placeholder="Insira o local do evento"
-            {...register("localizacao")}
-          />
-          <label htmlFor="teams">Times confirmados</label>
-          <input
-            type="text"
-            id="teams"
-            placeholder="Insira os times que irão participar"
-            {...register("teams")}
+            {...register("address")}
           />
           <DivBtt>
-            <button type="submit">Editar</button>
-            <button onClick={() => {}}>Excluir</button>
+            <button type="submit">Atualizar</button>
+            <button
+              type="button"
+              onClick={() => {
+                deleteEvent();
+              }}
+            >
+              Excluir
+            </button>
           </DivBtt>
         </FormEvent>
       </DivInter>

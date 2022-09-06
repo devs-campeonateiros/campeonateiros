@@ -1,7 +1,9 @@
-import { DivModal, DivInter, Divheader, FormEvent } from "./styles";
 import { useForm } from "react-hook-form";
 import { useContext } from "react";
-import { GlobalContext, IEditUser } from "../../context/GlobalContext";
+
+import { DivModal, DivInter, Divheader, FormEvent } from "./styles";
+import { GlobalContext } from "../../context/GlobalContext";
+import { IEditUser } from "../../context/GlobalInterfaces";
 
 export const ModalEditUser = () => {
   const {
@@ -10,7 +12,7 @@ export const ModalEditUser = () => {
     formState: { errors },
   } = useForm<IEditUser>();
 
-  const { editUser, setEditUserModal } = useContext(GlobalContext);
+  const { editUser, setEditUserModal, user } = useContext(GlobalContext);
 
   return (
     <DivModal>
@@ -27,18 +29,7 @@ export const ModalEditUser = () => {
           </button>
         </Divheader>
 
-        <FormEvent
-          onSubmit={() => {
-            handleSubmit(editUser);
-          }}
-        >
-          <label htmlFor="email">Email</label>
-          <input
-            type="text"
-            id="email"
-            placeholder="E-mail"
-            {...register("email")}
-          />
+        <FormEvent onSubmit={handleSubmit(editUser)}>
           <label htmlFor="name">Nome</label>
           <input
             type="text"

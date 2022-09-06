@@ -1,31 +1,30 @@
-import { DivModal, DivInter, Divheader, FormEvent } from "./styles";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useContext } from "react";
+
+import { DivModal, DivInter, Divheader, FormEvent } from "./styles";
 import { GlobalContext } from "../../context/GlobalContext";
+import { IEventRegister } from "./interface";
 
 const schema = yup.object({
-  name: yup.string().required("Campo obrigatório"),
-  localization: yup.string().required("Campo obrigatório"),
-  "date-start": yup
+  name: yup.string().required("Qual o nome do evento?"),
+  localization: yup.string().required("Qual localização?"),
+  dateStart: yup
     .date()
     .min(new Date(), "Por Favor escolha uma data futura")
-    .typeError("Data de inicio é obrigatório"),
-  "date-end": yup
+    .typeError("Data de inicio é obrigatório")
+    .transform(function (value) {
+      return value.toLocaleDateString();
+    }),
+  dateEnd: yup
     .date()
     .min(yup.ref("date-start"), "End date must be grater than start date")
-    .typeError("End Date is Required"),
+    .typeError("End Date is Required")
+    .transform(function (value) {
+      return value.toLocaleDateString();
+    }),
 });
-
-interface IEventRegister {
-  category: string;
-  userId: number;
-  name: string;
-  localization: string;
-  "date-start": Date;
-  "date-end": Date;
-}
 
 export const ModalAddEvent = () => {
   const {
@@ -77,19 +76,19 @@ export const ModalAddEvent = () => {
             {...register("localization")}
           />
           <p>{errors.localization?.message}</p>
-          <label htmlFor="date-start">Inicio do evento</label>
+          <label htmlFor="dateStart">Inicio do evento</label>
           <input
             type="date"
-            id="date-start"
+            id="dateStart"
             placeholder="Insira a data inicial do evento!"
-            {...register("date-start")}
+            {...register("dateStart")}
           />
-          <label htmlFor="date-end">Fim do evento</label>
+          <label htmlFor="dateEnd">Fim do evento</label>
           <input
             type="date"
-            id="date-end"
+            id="dateEnd"
             placeholder="Insira a data final do evento"
-            {...register("date-end")}
+            {...register("dateEnd")}
           />
           <button type="submit">Adicionar Evento</button>
         </FormEvent>

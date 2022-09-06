@@ -1,7 +1,8 @@
+import { useContext } from "react";
+import { FaUserCircle } from "react-icons/fa";
+
 import { Header, DivLogo } from "./style";
 import logo from "../../assets/logo.png";
-import userImg from "../../assets/userImg.png";
-import { useContext } from "react";
 import { GlobalContext } from "../../context/GlobalContext";
 
 const CompleteHeader = () => {
@@ -15,12 +16,18 @@ const CompleteHeader = () => {
           <h1>League of Campeonateiros</h1>
         </div>
         <div className="divOptions">
-          <ul>
+          {/* <ul>
             <li>Jogador</li>
             <li>Organizador</li>
-          </ul>
+          </ul> */}
           <button onClick={() => setEditUserModal(true)}>
-            <img src={user.url_image} alt={user.name} />
+            {user.url_image ? (
+              <img src={user.url_image} alt="aa" />
+            ) : (
+              <span>
+                <FaUserCircle />
+              </span>
+            )}
             {user.name}
           </button>
         </div>
