@@ -26,6 +26,8 @@ const schema = yup.object({
     }),
 });
 
+
+
 export const ModalAddEvent = () => {
   const {
     register,
