@@ -27,6 +27,8 @@ interface IEventRegister {
     "date-end": Date;
 }
 
+
+
 export const ModalAddEvent = () => {
     const {
         register,
