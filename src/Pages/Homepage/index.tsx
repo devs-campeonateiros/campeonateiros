@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import HeaderHomepage from "../../components/HeaderHomepage";
 import { IEvent } from "../../context/GlobalInterfaces";
@@ -56,6 +57,9 @@ const Homepage = () => {
                     <p className="eventName">{event.name}</p>
                   </div>
                   <div className="cardFooter">
+                    
+                    <Link to={`/events/${event.id}`}>Ver evento</Link>
+                    
                     <button
                       className="btnViewEvent"
                       onClick={() => console.log(event.id)}
