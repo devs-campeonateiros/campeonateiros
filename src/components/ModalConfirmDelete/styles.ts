@@ -2,15 +2,17 @@ import styled from "styled-components";
 
 export const DivModal = styled.div`
   display: flex;
-  height: 100vh;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+
   width: 100vw;
-  position: absolute;
+  height: 100vh;
   left: 0;
   top: 0;
   z-index: 1;
-  background-color: rgba(0, 0, 0, 0.5);
-  align-items: center;
-  justify-content: center;
+
+  background-color: rgba(0, 0, 0, 0.8);
 `;
 
 export const DivInter = styled.div`
