@@ -20,11 +20,13 @@ export interface IGlobalContext {
   deleteEvent(): void;
   deleteUser(): void;
   addEvent: boolean;
-  setAddEvent: React.Dispatch<React.SetStateAction<boolean>>;
+  setAddEvent: Dispatch<SetStateAction<boolean>>;
   editEventModal: boolean;
-  setEditEventModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditEventModal: Dispatch<SetStateAction<boolean>>;
   editUserModal: boolean;
-  setEditUserModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setEditUserModal: Dispatch<SetStateAction<boolean>>;
+  modalConfirmDelete: boolean;
+  setModalConfirmDelete: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface IEditUser {

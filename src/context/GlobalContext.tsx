@@ -23,8 +23,9 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
   const [users, setUsers] = useState<IUser[]>({} as IUser[]);
   const [events, setEvents] = useState<IEvent[]>({} as IEvent[]);
   const [addEvent, setAddEvent] = useState(false);
-  const [editEventModal, setEditEventModal] = useState(false);
-  const [editUserModal, setEditUserModal] = useState(false);
+  const [editEventModal, setEditEventModal] = useState<boolean>(false);
+  const [editUserModal, setEditUserModal] = useState<boolean>(false);
+  const [modalConfirmDelete, setModalConfirmDelete] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const token = window.localStorage.getItem("@Campeonateiros-token");
@@ -79,8 +80,6 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
   function createEvent(data: IEvent) {
     const userId = window.localStorage.getItem("@Campeonateiros-id");
     const dataEvent = { ...data, userId };
-
-    console.log(dataEvent);
 
     api
       .post("/events", dataEvent, {
@@ -153,7 +152,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        toast.success("Evento atualizado!!");
+        toast.success("Usuário atualizado!!");
         setUser(res.data);
         listUser();
         setEditUserModal(!editUserModal);
@@ -173,7 +172,6 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
           theme: "dark",
         });
         setEvents(events.filter((elem) => elem.id !== event.id));
-        setEditEventModal(!editEventModal);
       })
       .catch(() => {
         toast.error("Algo deu errado!");
@@ -222,6 +220,8 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         setEditEventModal,
         editUserModal,
         setEditUserModal,
+        modalConfirmDelete,
+        setModalConfirmDelete,
       }}
     >
       {children}
