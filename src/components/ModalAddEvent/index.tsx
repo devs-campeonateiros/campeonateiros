@@ -14,6 +14,8 @@ const schema = yup.object({
   dateEnd: yup.string().typeError("Fim do evento é obrigatório!"),
 });
 
+
+
 export const ModalAddEvent = () => {
   const {
     register,

@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-
-import HeaderHomepage from "../../components/HeaderHomepage";
 import { IEvent } from "../../context/GlobalInterfaces";
 import { api } from "../../services/Api";
 import { Container } from "./styles";
+import fut from "../../assets/fut.png";
+import CompleteHeader from "../../components/CompleteHeader";
+import SimpleHeader from "../../components/simpleHeader";
 
 const Homepage = () => {
   const [eventsList, setEventsList] = useState<IEvent[]>([]);
@@ -14,17 +15,19 @@ const Homepage = () => {
     });
   }, []);
 
+  const token = localStorage.getItem("@Campeonateiros-token") || "";
+
   return (
     <>
-      <HeaderHomepage />
+      {token ? <CompleteHeader /> : <SimpleHeader />}
 
       <Container>
         <div className="mainHomepage">
-          <img
-            className="imgHomepage"
-            src="https://s3-alpha-sig.figma.com/img/b080/fcc2/d93373aa6c51deae4201b339606864ae?Expires=1662940800&Signature=fjdfTCRMgKyc0wedlIYuXdxd8OYF1vvmUnmMcW7e7EbAJNWoHlo6rhZukB-Fv5--mpakFL3Src0s4JHMBObD3RW66TgSYOqpXZI7iODs53ZLHVjk4NjWwYOKwmoSTC8UlYeOgPJOPbgoa-NOjCPSa5coLcCYr4LlqtrkheqYbmfivmvy5pU4uWv1zTk0JfQnpyKoo-2SYCY4GfQIHo07EYDoZPaPeQS2rgx3890FEtAfI-cxH1T8Vm7KsvpoXKTDVzTdnsuiSKX5XlfwUSxezJIId1y-dOjIdGx7RIIxHA67JQTsIFmK4atRugLVCv7m5Jf6GlzN0vkYsexOSJ06lw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-            alt=""
-          />
+          <div className="divImg">
+            <img className="imgHomepage" src={fut} alt="" />
+            <span>Venha fazer o seu campeonato com a gente!</span>
+            <button className="moreInfo">Mais Informações</button>
+          </div>
 
           <div className="buttonsGroup">
             <button type="button" className="btnFilter btnAllEvents">
@@ -40,6 +43,9 @@ const Homepage = () => {
               <button type="button" className="btnFilter btnVoleiEvents">
                 Vôlei
               </button>
+              <button type="button" className="btnFilter btnVoleiEvents">
+                Beach Tênis
+              </button>
             </div>
           </div>
           <div className="eventsList">
@@ -52,7 +58,7 @@ const Homepage = () => {
                   />
 
                   <div className="cardDescription">
-                    <p className="eventDate">{/* {event["date-start"]} */}</p>
+                    <p className="eventDate">{event.category}</p>
                     <p className="eventName">{event.name}</p>
                   </div>
                   <div className="cardFooter">

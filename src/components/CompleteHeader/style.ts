@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Header = styled.header`
   height: 4rem;
-
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -12,7 +12,7 @@ export const DivLogo = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 20px;
+  padding: 0 10px;
 
   height: 100%;
   width: 100%;
@@ -21,57 +21,77 @@ export const DivLogo = styled.div`
   .divLogo {
     display: flex;
     align-items: center;
-  }
-  .divOptions {
-    display: flex;
-    align-items: center;
-    gap: 250px;
-  }
-  ul {
-    list-style: none;
-    display: flex;
-    gap: 100px;
-  }
-  li {
-    color: #ffffff;
-  }
-  button {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #ffffff;
-    background: none;
-    border-radius: 50%;
-    border: none;
-    width: 110px;
 
     img {
       width: 40px;
-      border-radius: 50%;
     }
-  }
-  img {
-    width: 45px;
-  }
-  span {
-    svg {
-      width: 35px;
-      height: 35px;
+
+    h1 {
+      font-size: 14px;
+      color: #ffffff;
+      padding-left: 10px;
+    }
+    @media (min-width: 900px) {
+        img {
+      width: 50px;
+    }
+        h1 {
+      font-size: 16px;
+    }
     }
   }
 
-  h1 {
-    font-size: 18px;
-    color: #ffffff;
-    padding-left: 10px;
-  }
-  @media (min-width: 768px) {
-    img {
-      display: flex;
-      width: 45px;
+  .divOptions {
+    display: flex;
+    align-items: center;
+
+    ul {
+      display: none;
     }
-    h1 {
-      padding-left: 10px;
+
+    li {
+      color: #ffffff;
+    }
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #ffffff;
+      background: none;
+      border-radius: 50%;
+      border: none;
+      width: 100px;
+
+      img {
+        width: 35px;
+      }
+    }
+    @media (min-width: 600px) {
+      gap: 25px;
+
+      ul {
+        display: flex;
+        list-style: none;
+        gap: 10px;
+      }
+      
+      button {
+        width: 100%;
+      }
+    }
+    @media (min-width: 900px) {
+      gap: 180px;
+
+      ul {
+        display: flex;
+        list-style: none;
+        gap: 40px;
+      }
+
+      button {
+        width: 100%;
+      }
     }
   }
 `;

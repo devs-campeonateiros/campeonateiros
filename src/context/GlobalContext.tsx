@@ -79,9 +79,10 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
 
   function createEvent(data: IEvent) {
     const userId = window.localStorage.getItem("@Campeonateiros-id");
+    const token = window.localStorage.getItem("@Campeonateiros-token")
     const dataEvent = { ...data, userId };
 
-    api
+api
       .post("/events", dataEvent, {
         headers: { Authorization: `Bearer ${token}` },
       })
@@ -89,8 +90,9 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         toast.success("Evento criado com sucesso!", {
           theme: "dark",
         });
-
+        console.log(res)
         setAddEvent(!addEvent);
+        // navigate(`/events/${}`)
         // direcionar para a pág do Evento
       })
       .catch((err) => {
