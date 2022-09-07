@@ -43,7 +43,7 @@ export const DivInter = styled.div`
     font-size: 14px;
   }
   button:hover {
-    background: Lime;
+    background: green;
     width: 6.1rem;
     height: 2.1rem;
   }

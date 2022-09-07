@@ -30,10 +30,13 @@ export const DivInter = styled.div`
 
   @media (max-width: 768px) {
     width: 18rem;
-    height: 32rem;
+    height: 30rem;
   }
 `;
-
+export const Perrors = styled.p`
+  font-size: 12px;
+  color: red;
+`;
 export const Divheader = styled.div`
   display: flex;
   justify-content: space-around;
@@ -48,7 +51,7 @@ export const Divheader = styled.div`
   margin-bottom: 1rem;
   h2 {
     font-weight: 400;
-    font-size: 20px;
+    font-size: 18px;
     line-height: 38px;
     color: #ffffff;
   }
@@ -66,13 +69,14 @@ export const FormEvent = styled.form`
   justify-content: center;
   align-items: flex-start;
 
-  gap: 5px;
+  gap: 2px;
   font-weight: 500;
   font-size: 18px;
   color: black;
 
   p {
     margin-left: 5px;
+    font-size: 12px;
   }
   select {
     width: 18rem;
@@ -95,6 +99,7 @@ export const FormEvent = styled.form`
   }
   label {
     margin-left: 5px;
+    font-size: 12px;
   }
 
   @media (max-width: 768px) {
@@ -119,15 +124,20 @@ export const DivBtt = styled.div`
   button {
     align-self: center;
     border: none;
-    width: 6rem;
-    height: 2rem;
+    width: 6.5rem;
+    height: 1.5rem;
 
     margin-top: 10px;
     background: #333333;
     border-radius: 100px;
-    font-size: 12px;
 
     color: white;
-    font-size: 20px;
+    font-size: 16px;
+  }
+  button:hover {
+    background-color: green;
+  }
+  button + button:hover {
+    background-color: red;
   }
 `;
