@@ -174,11 +174,10 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
       url_image: user.url_image,
       userId: user.id,
     };
-
-    const newDatabase = [...[event.teams], team];
+    const dados = { ...[event.teams], team };
 
     api
-      .patch(`/events/${event.id}`, newDatabase, {
+      .patch(`/events/${event.id}`, dados, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(
