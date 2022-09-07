@@ -23,6 +23,8 @@ const Login = () => {
     password: yup.string().required("senha obrigatória"),
   });
 
+  window.localStorage.clear();
+
   const {
     register,
     handleSubmit,
