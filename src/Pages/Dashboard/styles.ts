@@ -51,6 +51,7 @@ const Container = styled.div`
       color: #fff;
       padding: 15px;
       border-radius: 50px;
+      z-index: 0;
     }
   }
   .divEvent {

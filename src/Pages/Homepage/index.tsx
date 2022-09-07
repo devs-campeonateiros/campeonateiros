@@ -1,20 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { IEvent } from "../../context/GlobalInterfaces";
 import { api } from "../../services/Api";
 import { Container } from "./styles";
+
 import fut from "../../assets/fut.png";
 import CompleteHeader from "../../components/CompleteHeader";
 import SimpleHeader from "../../components/simpleHeader";
+import { ModalEditUser } from "../../components/ModalEditUser";
+import { GlobalContext } from "../../context/GlobalContext";
 
 const Homepage = () => {
   const [eventsList, setEventsList] = useState<IEvent[]>([]);
   const [eventsFiltered, setEventsFiltered] = useState<IEvent[]>([]);
 
+  const token = localStorage.getItem("@Campeonateiros-token") || "";
+
+  const { editUserModal } = useContext(GlobalContext);
+
   useEffect(() => {
     api.get("/events").then((response) => {
       setEventsList(response.data);
     });
-  }, []);
+  }, [token]);
 
   function filterSports(sport: string) {
     setEventsFiltered(eventsList.filter((elem) => elem.category === sport)) ;
@@ -22,9 +29,10 @@ const Homepage = () => {
 
   const token = localStorage.getItem("@Campeonateiros-token") || "";
 
+
   return (
     <>
-      {token ? <CompleteHeader /> : <SimpleHeader />}
+      <CompleteHeader />
 
       <Container>
         <div className="mainHomepage">
@@ -114,6 +122,8 @@ const Homepage = () => {
             </ul>
           </div>
         </div>
+
+        {editUserModal && <ModalEditUser />}
       </Container>
     </>
   );

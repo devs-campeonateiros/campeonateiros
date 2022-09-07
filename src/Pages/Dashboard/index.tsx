@@ -12,6 +12,7 @@ import { ModalEditEvent } from "../../components/ModalEditEvent";
 import { ModalAddEvent } from "../../components/ModalAddEvent";
 import { api } from "../../services/Api";
 import { ModalConfirmDelete } from "../../components/ModalConfirmDelete";
+import { ModalConfirmInscription } from "../../components/ModalConfirmInscription";
 
 const Dashboard = () => {
   const {
@@ -23,6 +24,8 @@ const Dashboard = () => {
     editEventModal,
     editUserModal,
     modalConfirmDelete,
+    modalConfirmInscription,
+    setModalConfirmInscription,
     setModalConfirmDelete,
   } = useContext(GlobalContext);
 
@@ -126,6 +129,15 @@ const Dashboard = () => {
               >
                 Excluir
               </button>
+              <button
+                className="btnDel"
+                onClick={() => {
+                  setEvent(event);
+                  setModalConfirmInscription(true);
+                }}
+              >
+                Inscreva-se
+              </button>
             </div>
           </div>
         ))}
@@ -134,6 +146,7 @@ const Dashboard = () => {
         {editEventModal && <ModalEditEvent />}
         {addEvent && <ModalAddEvent />}
         {modalConfirmDelete && <ModalConfirmDelete />}
+        {modalConfirmInscription && <ModalConfirmInscription />}
       </Container>
     </>
   );

@@ -28,7 +28,7 @@ export const DivInter = styled.div`
   border-radius: 15px;
   p {
     padding-top: 1rem;
-    margin: 10px;
+    margin: 10px 10px 10px 34px;
     font-size: 14px;
   }
   button {

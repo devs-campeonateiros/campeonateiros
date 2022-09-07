@@ -27,6 +27,10 @@ export interface IGlobalContext {
   setEditUserModal: Dispatch<SetStateAction<boolean>>;
   modalConfirmDelete: boolean;
   setModalConfirmDelete: Dispatch<SetStateAction<boolean>>;
+  listUser(): void;
+  modalConfirmInscription: boolean;
+  setModalConfirmInscription: Dispatch<SetStateAction<boolean>>;
+  confirmInscription(): void;
 }
 
 export interface IEditUser {
@@ -83,12 +87,13 @@ export interface IEvent {
   awards?: string;
   quantity?: number;
   address?: string;
-  teams?: IUserEvent[];
+  teams?: IUserEvent[] | undefined;
   id?: string;
 }
 
-interface IUserEvent {
+export interface IUserEvent {
+  name: string;
   city: string;
-  url_image: string;
+  url_image: string | undefined;
   userId: string;
 }
