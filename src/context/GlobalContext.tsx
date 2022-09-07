@@ -44,7 +44,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
       listEvents();
       listUser();
     }
-  }, []);
+  }, [token, userId]);
 
   function registerUser(data: IUser) {
     api

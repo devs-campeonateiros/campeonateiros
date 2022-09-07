@@ -8,10 +8,10 @@ import { api } from "../../services/Api";
 import { ContainerEvent } from "./styles";
 
 const EventPage = () => {
-  const [eventsList, setEventsList] = useState<IEvent[]>([]);
-
   const { id } = useParams();
   const idNumber = Number(id);
+
+  const [eventsList, setEventsList] = useState<IEvent[]>([]);
 
   const {
     setEvent,
@@ -26,7 +26,8 @@ const EventPage = () => {
     });
   }, [setEventsList]);
 
-  const evento = eventsList.find((elem) => elem.id === id);
+  const evento = eventsList.find((elem) => elem.id == id);
+
   return (
     <>
       <CompleteHeader />
@@ -61,7 +62,7 @@ const EventPage = () => {
             {evento?.teams && (
               <div>
                 <b>Times incritos:</b>
-                <p>Algum ai</p>
+                <p>{evento.teams.length}</p>
               </div>
             )}
           </div>
@@ -70,6 +71,7 @@ const EventPage = () => {
             <h3>{evento?.subscription}</h3>
             <button
               onClick={() => {
+                setEvent(evento!);
                 setModalConfirmInscription(true);
               }}
             >
