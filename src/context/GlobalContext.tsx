@@ -189,6 +189,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
 
     api
       .patch(`/events/${event.id}`, data, {
+
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(

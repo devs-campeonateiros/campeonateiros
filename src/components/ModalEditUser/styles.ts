@@ -14,6 +14,7 @@ export const DivModal = styled.div`
 
   background-color: rgba(0, 0, 0, 0.8);
 `;
+
 export const DivInter = styled.div`
   display: flex;
   flex-direction: column;
@@ -41,8 +42,8 @@ export const Divheader = styled.div`
   border-bottom: solid 6px rgba(255, 125, 0, 0.95);
   margin-bottom: 1rem;
   h2 {
-    font-weight: 500;
-    font-size: 22px;
+    font-weight: 400;
+    font-size: 20px;
     line-height: 38px;
     color: #ffffff;
   }
@@ -60,17 +61,18 @@ export const FormEvent = styled.form`
   justify-content: center;
   align-items: flex-start;
 
-  gap: 6px;
+  gap: 4px;
   font-weight: 500;
-  font-size: 18px;
+
   color: black;
 
   p {
     margin-left: 5px;
+    font-size: 12px;
   }
   input {
     width: 16rem;
-    height: 2.2rem;
+    height: 2rem;
 
     background: #ffffff;
     border: 1.5px solid #ff7d00;
@@ -80,6 +82,7 @@ export const FormEvent = styled.form`
   }
   label {
     margin-left: 5px;
+    font-size: 14px;
   }
   button {
     align-self: center;
@@ -92,6 +95,13 @@ export const FormEvent = styled.form`
     border-radius: 100px;
 
     color: white;
-    font-size: 20px;
+    font-size: 14px;
   }
+  button:hover {
+    background-color: green;
+  }
+`;
+export const Perrors = styled.p`
+  font-size: 12px;
+  color: red;
 `;

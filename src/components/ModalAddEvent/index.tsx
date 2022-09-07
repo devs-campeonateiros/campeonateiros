@@ -3,18 +3,16 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useContext } from "react";
 
-import { DivModal, DivInter, Divheader, FormEvent } from "./styles";
+import { DivModal, DivInter, Divheader, FormEvent, Perrors } from "./styles";
 import { GlobalContext } from "../../context/GlobalContext";
 import { IEventRegister } from "./interface";
 
 const schema = yup.object({
-  name: yup.string().required("Qual o nome do evento?"),
-  localization: yup.string().required("Qual localização?"),
-  dateStart: yup.string().typeError("Data de inicio é obrigatório!"),
-  dateEnd: yup.string().typeError("Fim do evento é obrigatório!"),
+  name: yup.string().required("*Qual o nome do evento?"),
+  localization: yup.string().required("*Qual localização?"),
+  dateStart: yup.string().required("*Data de inicio é obrigatório"),
+  dateEnd: yup.string().required("*Data de fim é obrigatório"),
 });
-
-
 
 export const ModalAddEvent = () => {
   const {
@@ -57,7 +55,7 @@ export const ModalAddEvent = () => {
             placeholder="Insira um nome para o evento!"
             {...register("name")}
           />
-          <p>{errors.name?.message}</p>
+          <Perrors>{errors.name?.message}</Perrors>
           <label htmlFor="localization">Local do evento</label>
           <input
             type="text"
@@ -65,7 +63,7 @@ export const ModalAddEvent = () => {
             placeholder="Insira o local do evento!"
             {...register("localization")}
           />
-          <p>{errors.localization?.message}</p>
+          <Perrors>{errors.localization?.message}</Perrors>
 
           <label htmlFor="dateStart">Inicio do evento</label>
           <input
@@ -74,6 +72,7 @@ export const ModalAddEvent = () => {
             placeholder="Insira a data inicial do evento!"
             {...register("dateStart")}
           />
+          <Perrors>{errors.dateStart?.message}</Perrors>
           <label htmlFor="dateEnd">Fim do evento</label>
           <input
             type="date"
@@ -81,7 +80,8 @@ export const ModalAddEvent = () => {
             placeholder="Insira a data final do evento"
             {...register("dateEnd")}
           />
-          <button type="submit">Adicionar Evento</button>
+          <Perrors>{errors.dateEnd?.message}</Perrors>
+          <button type="submit">Adicionar</button>
         </FormEvent>
       </DivInter>
     </DivModal>
