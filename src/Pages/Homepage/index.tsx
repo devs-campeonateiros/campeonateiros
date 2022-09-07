@@ -8,6 +8,7 @@ import fut from "../../assets/fut.png";
 import CompleteHeader from "../../components/CompleteHeader";
 import { ModalEditUser } from "../../components/ModalEditUser";
 import { GlobalContext } from "../../context/GlobalContext";
+import ModalMoreInfo from "../../components/ModalMoreInfo";
 
 const Homepage = () => {
   const [eventsList, setEventsList] = useState<IEvent[]>([]);
@@ -15,7 +16,8 @@ const Homepage = () => {
 
   const token = localStorage.getItem("@Campeonateiros-token") || "";
 
-  const { editUserModal, setEvent } = useContext(GlobalContext);
+  const { editUserModal, setEvent, setModalMoreInfo, modalMoreInfo } =
+    useContext(GlobalContext);
 
   const navigate = useNavigate();
 
@@ -38,7 +40,10 @@ const Homepage = () => {
           <div className="divImg">
             <img className="imgHomepage" src={fut} alt="" />
             <span>Venha fazer o seu campeonato com a gente!</span>
-            <button className="moreInfo">Mais Informações</button>
+
+            <button className="moreInfo" onClick={() => setModalMoreInfo(true)}>
+              Mais Informações
+            </button>
           </div>
 
           <div className="buttonsGroup">
@@ -137,6 +142,7 @@ const Homepage = () => {
         </div>
 
         {editUserModal && <ModalEditUser />}
+        {modalMoreInfo && <ModalMoreInfo />}
       </Container>
     </>
   );

@@ -31,6 +31,8 @@ export interface IGlobalContext {
   modalConfirmInscription: boolean;
   setModalConfirmInscription: Dispatch<SetStateAction<boolean>>;
   confirmInscription(): void;
+  setModalMoreInfo: Dispatch<SetStateAction<boolean>>;
+  modalMoreInfo: boolean;
 }
 
 export interface IEditUser {
