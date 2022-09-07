@@ -11,6 +11,7 @@ import {
   IUserLogin,
   IEditEvent,
   IEvent,
+  IUserEvent,
 } from "./GlobalInterfaces";
 
 export const GlobalContext = createContext<IGlobalContext>(
@@ -26,8 +27,10 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
   const [editEventModal, setEditEventModal] = useState<boolean>(false);
   const [editUserModal, setEditUserModal] = useState<boolean>(false);
   const [modalConfirmDelete, setModalConfirmDelete] = useState<boolean>(false);
-
+  const [modalConfirmInscription, setModalConfirmInscription] =
+    useState<boolean>(false);
   const navigate = useNavigate();
+
   const token = window.localStorage.getItem("@Campeonateiros-token");
   const userId = window.localStorage.getItem("@Campeonateiros-id");
 
@@ -90,7 +93,6 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         toast.success("Evento criado com sucesso!", {
           theme: "dark",
         });
-        console.log(res);
         setAddEvent(!addEvent);
         // navigate(`/events/${}`)
         // direcionar para a pág do Evento
@@ -164,6 +166,33 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
       });
   }
 
+  function confirmInscription() {
+    const team = {
+      name: user.name,
+      city: user.city,
+      url_image: user.url_image,
+      userId: user.id,
+    };
+
+    const newDatabase = [...[event.teams], team];
+
+    api
+      .patch(`/events/${event.id}`, newDatabase, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then(
+        () => (
+          toast.success("incrição feita com Sucesso!", {
+            theme: "dark",
+          }),
+          listEvents()
+        )
+      )
+      .catch((err) => {
+        toast.error("Algo deu errado...");
+      });
+  }
+
   function deleteEvent() {
     api
       .delete(`/events/${event.id}`, {
@@ -225,6 +254,9 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         modalConfirmDelete,
         setModalConfirmDelete,
         listUser,
+        modalConfirmInscription,
+        setModalConfirmInscription,
+        confirmInscription,
       }}
     >
       {children}
