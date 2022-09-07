@@ -29,6 +29,8 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
   const [modalConfirmDelete, setModalConfirmDelete] = useState<boolean>(false);
   const [modalConfirmInscription, setModalConfirmInscription] =
     useState<boolean>(false);
+  const [modalMoreInfo, setModalMoreInfo] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   const token = window.localStorage.getItem("@Campeonateiros-token");
@@ -189,7 +191,6 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
 
     api
       .patch(`/events/${event.id}`, data, {
-
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(
@@ -269,6 +270,8 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         modalConfirmInscription,
         setModalConfirmInscription,
         confirmInscription,
+        setModalMoreInfo,
+        modalMoreInfo,
       }}
     >
       {children}
