@@ -16,7 +16,6 @@ import { ModalConfirmDelete } from "../../components/ModalConfirmDelete";
 const Dashboard = () => {
   const {
     user,
-    events,
     setEvent,
     setAddEvent,
     setEditEventModal,
@@ -39,7 +38,7 @@ const Dashboard = () => {
     }
 
     atualizandoEvents();
-  }, [editEventModal, addEvent, modalConfirmDelete]);
+  }, [editEventModal,navigate, addEvent, modalConfirmDelete]);
 
   function atualizandoEvents() {
     api.get("/events").then((response) => {

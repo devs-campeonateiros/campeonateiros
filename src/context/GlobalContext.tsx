@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -92,8 +92,6 @@ api
         });
         console.log(res)
         setAddEvent(!addEvent);
-        // navigate(`/events/${}`)
-        // direcionar para a pág do Evento
       })
       .catch((err) => {
         toast.error("Algo deu errado!", {
