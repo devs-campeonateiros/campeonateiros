@@ -93,7 +93,6 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         toast.success("Evento criado com sucesso!", {
           theme: "dark",
         });
-
         setAddEvent(!addEvent);
         // navigate(`/events/${}`)
         // direcionar para a pág do Evento
@@ -254,6 +253,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         setEditUserModal,
         modalConfirmDelete,
         setModalConfirmDelete,
+        listUser,
         modalConfirmInscription,
         setModalConfirmInscription,
         confirmInscription,

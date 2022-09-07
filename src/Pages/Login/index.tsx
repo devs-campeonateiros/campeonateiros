@@ -8,6 +8,7 @@ import { ContainerLogin } from "./styles";
 import { GlobalContext } from "../../context/GlobalContext";
 import SimpleHeader from "../../components/simpleHeader";
 import { IUserDate } from "./Interfaces";
+import CompleteHeader from "../../components/CompleteHeader";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -36,7 +37,7 @@ const Login = () => {
 
   return (
     <>
-      <SimpleHeader />
+      <CompleteHeader />
       <ContainerLogin>
         <div className="container">
           <form onSubmit={handleSubmit(loginUser)}>

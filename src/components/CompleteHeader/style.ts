@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Header = styled.header`
   height: 4rem;
-  width: 100%;
+  width: 99%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,66 +32,86 @@ export const DivLogo = styled.div`
       padding-left: 10px;
     }
     @media (min-width: 900px) {
-        img {
-      width: 50px;
-    }
-        h1 {
-      font-size: 16px;
-    }
+      img {
+        width: 50px;
+      }
+      h1 {
+        font-size: 16px;
+      }
     }
   }
 
   .divOptions {
-    display: flex;
-    align-items: center;
-
-    ul {
-      display: none;
-    }
-
-    li {
-      color: #ffffff;
-    }
-
-    button {
+    .menu-container {
+      position: relative;
       display: flex;
+      justify-content: center;
       align-items: center;
-      gap: 10px;
-      color: #ffffff;
-      background: none;
-      border-radius: 50%;
-      border: none;
-      width: 100px;
+      /* z-index: 2; */
+      justify-content: center;
 
       img {
-        width: 35px;
-      }
-    }
-    @media (min-width: 600px) {
-      gap: 25px;
-
-      ul {
-        display: flex;
-        list-style: none;
-        gap: 10px;
-      }
-      
-      button {
-        width: 100%;
-      }
-    }
-    @media (min-width: 900px) {
-      gap: 180px;
-
-      ul {
-        display: flex;
-        list-style: none;
-        gap: 40px;
+        width: 40px;
+        border-radius: 50%;
       }
 
       button {
-        width: 100%;
+        cursor: pointer;
+        border: none;
+        background: none;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
       }
+
+      nav ul {
+        display: flex;
+        flex-direction: column;
+        width: 30vw;
+        margin-top: 155px;
+        margin-right: -68px;
+        transition: 1s ease;
+        list-style: none;
+        background-color: rgba(0, 0, 0, 0.8);
+        align-items: center;
+      }
+
+      nav a {
+        display: block;
+        color: gray;
+        text-decoration: none;
+        font-size: 1rem;
+      }
+
+      ul button {
+        color: gray;
+        font-size: 1rem;
+      }
+
+      ul button:hover {
+        color: #ffffff;
+      }
+
+      nav a:hover {
+        color: #ffffff;
+      }
+
+      nav .lastLi {
+        border-bottom: 2px solid #ffffff;
+      }
+    }
+
+    .menu.active {
+      opacity: 1;
+      visibility: visible;
+      z-index: 2;
+    }
+
+    .menu {
+      opacity: 0;
+      z-index: -1;
     }
   }
 `;
