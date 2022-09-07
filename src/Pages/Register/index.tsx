@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import * as yup from "yup";
+import CompleteHeader from "../../components/CompleteHeader";
 
 import SimpleHeader from "../../components/simpleHeader";
 import { GlobalContext } from "../../context/GlobalContext";
@@ -38,7 +39,7 @@ const Register = () => {
 
   return (
     <>
-      <SimpleHeader />
+      <CompleteHeader />
       <ContainerRegister>
         <div className="container">
           <h2>Cadastre-se</h2>

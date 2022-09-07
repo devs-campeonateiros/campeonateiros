@@ -27,6 +27,7 @@ export interface IGlobalContext {
   setEditUserModal: Dispatch<SetStateAction<boolean>>;
   modalConfirmDelete: boolean;
   setModalConfirmDelete: Dispatch<SetStateAction<boolean>>;
+  listUser(): void;
 }
 
 export interface IEditUser {
