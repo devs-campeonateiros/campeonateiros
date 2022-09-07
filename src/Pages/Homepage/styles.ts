@@ -129,6 +129,10 @@ export const Container = styled.div`
       justify-content: space-between;
       width: 90vw;
       height: 40px;
+      .btnFilter{
+        width: 28vw;
+
+      }
     }
     @media (min-width: 500px) {
       display: flex;
@@ -141,7 +145,10 @@ export const Container = styled.div`
       .btnsFilterSports {
         display: flex;
         width: 100%;
-        height: 40px;
+        .btnFilter{
+        width: 20vw;
+
+      }
       }
     }
     @media (min-width: 600px) {
@@ -155,7 +162,10 @@ export const Container = styled.div`
       .btnsFilterSports {
         display: flex;
         width: 300px;
-        height: 40px;
+        .btnFilter{
+        width: 93px;
+
+      }
       }
     }
     @media (min-width: 900px) {
@@ -169,8 +179,6 @@ export const Container = styled.div`
       }
       .btnsFilterSports {
         display: flex;
-        width: 340px;
-        height: 40px;
       }
     }
     @media (min-width: 1280px) {
@@ -185,7 +193,6 @@ export const Container = styled.div`
       }
       .btnsFilterSports {
         display: flex;
-        width: 390px;
         height: 100%;
       }
     }

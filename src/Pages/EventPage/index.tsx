@@ -21,10 +21,8 @@ const EventPage = () => {
       setEventsList(response.data);
     });
   }, [setEventsList]);
-  //  if(!id){
-
-  //  }
-  const evento = eventsList.find((elem) => elem.id == id)
+  
+  const evento = eventsList.find((elem) => elem.id === id)
   console.log(evento)
   return (
     <>

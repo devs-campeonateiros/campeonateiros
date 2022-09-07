@@ -1,8 +1,10 @@
 import { Header, DivLogo } from "./style";
 import logo from "../../assets/logo.png";
 import userImg from "../../assets/userImg.png";
+import { useNavigate } from "react-router-dom";
 
 const SimpleHeader = () => {
+  const navigate = useNavigate()
   return (
     <Header>
       <DivLogo>
@@ -15,7 +17,7 @@ const SimpleHeader = () => {
             <li>Jogador</li>
             <li>Organizador</li>
           </ul>
-          <button>
+          <button onClick={()=>navigate("/login")}>
             <img src={userImg} alt="" />
             Sign In / Sign Up
           </button>
