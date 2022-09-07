@@ -24,11 +24,8 @@ const Homepage = () => {
   }, [token]);
 
   function filterSports(sport: string) {
-    setEventsFiltered(eventsList.filter((elem) => elem.category === sport)) ;
+    setEventsFiltered(eventsList.filter((elem) => elem.category === sport));
   }
-
-  const token = localStorage.getItem("@Campeonateiros-token") || "";
-
 
   return (
     <>

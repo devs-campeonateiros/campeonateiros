@@ -9,18 +9,11 @@ import { GlobalContext } from "../../context/GlobalContext";
 import foto from "../../assets/userImg.png";
 
 const CompleteHeader = () => {
-  const { user, setEditUserModal, editUserModal, listUser } =
-    useContext(GlobalContext);
+  const { user, setEditUserModal, editUserModal } = useContext(GlobalContext);
   const [isActive, setIsActive] = useState<boolean>(false);
   const navigate = useNavigate();
   const token = localStorage.getItem("@Campeonateiros-token") || "";
   const userId = window.localStorage.getItem("@Campeonateiros-id");
-
-  useEffect(() => {
-    if (token !== null) {
-      listUser();
-    }
-  }, [token, userId]);
 
   return (
     <Header>
