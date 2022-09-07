@@ -31,7 +31,7 @@ const Dashboard = () => {
 
   const [myEventsList, setMyEventsList] = useState<IEvent[]>([]);
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const validation = window.localStorage.getItem("@Campeonateiros-id");
@@ -41,7 +41,7 @@ const Dashboard = () => {
     }
 
     atualizandoEvents();
-  }, [editEventModal,navigate, addEvent, modalConfirmDelete]);
+  }, [editEventModal, navigate, addEvent, modalConfirmDelete]);
 
   function atualizandoEvents() {
     api.get("/events").then((response) => {
@@ -95,7 +95,10 @@ const Dashboard = () => {
             {event.image ? (
               <img src={event.image} alt={event.name} />
             ) : (
-              <img src={ney} alt={event.name} />
+              <img
+                src="https://images.pexels.com/photos/7267588/pexels-photo-7267588.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                alt={event.category}
+              />
             )}
 
             <div className="divInfos">
@@ -110,25 +113,37 @@ const Dashboard = () => {
               <p className="address">Endereço: {event.address}</p>
             </div>
             <div className="buttonsCard">
-              <button className="infoEvent">Ver Evento</button>
               <button
-                className="btnEdit"
+                className="infoEvent"
                 onClick={() => {
                   setEvent(event);
-                  setEditEventModal(true);
+                  navigate(`/events/${event.id}`);
                 }}
               >
-                Editar
+                Ver Evento
               </button>
-              <button
-                className="btnDel"
-                onClick={() => {
-                  setEvent(event);
-                  setModalConfirmDelete(!modalConfirmDelete);
-                }}
-              >
-                Excluir
-              </button>
+              {event.userId == user.id && (
+                <>
+                  <button
+                    className="btnEdit"
+                    onClick={() => {
+                      setEvent(event);
+                      setEditEventModal(true);
+                    }}
+                  >
+                    Editar
+                  </button>
+                  <button
+                    className="btnDel"
+                    onClick={() => {
+                      setEvent(event);
+                      setModalConfirmDelete(!modalConfirmDelete);
+                    }}
+                  >
+                    Excluir
+                  </button>
+                </>
+              )}
               <button
                 className="btnDel"
                 onClick={() => {
