@@ -29,7 +29,7 @@ const CompleteHeader = () => {
                 <li>
                   <Link to={"/home"}>Home</Link>
                 </li>
-                {user.name ? (
+                {token ? (
                   <>
                     <li>
                       <Link to={"/dashboard"}>Dashboard</Link>
@@ -70,7 +70,7 @@ const CompleteHeader = () => {
               }}
               className="menu-button"
             >
-              {user.name ? (
+              {token ? (
                 <img src={user.url_image} alt="logo" />
               ) : (
                 <img src={foto} alt="nao logado" />

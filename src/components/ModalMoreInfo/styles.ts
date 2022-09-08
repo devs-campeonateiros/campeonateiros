@@ -22,6 +22,10 @@ export const DivInter = styled.div`
   border: 3px solid #ff7d00;
   box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.25);
   border-radius: 15px;
+
+  p {
+    padding: 5px 15px;
+  }
 `;
 
 export const Divheader = styled.div`
@@ -34,6 +38,7 @@ export const Divheader = styled.div`
   background: rgba(0, 0, 0, 0.88);
   border-bottom: solid 6px rgba(255, 125, 0, 0.95);
   margin-bottom: 1rem;
+
   h2 {
     font-weight: 500;
     font-size: 22px;

@@ -9,10 +9,14 @@ const ModalMoreInfo = () => {
     <DivModal>
       <DivInter>
         <Divheader>
-          <h2>Informações</h2>
-          <button type="button" onClick={() => setModalMoreInfo(false)}>
-            X
-          </button>
+          <div>
+            <h2>Informações</h2>
+          </div>
+          <div>
+            <button type="button" onClick={() => setModalMoreInfo(false)}>
+              X
+            </button>
+          </div>
         </Divheader>
         <h3>Seja bem-vindo(a) ao League Of Campeonateiros!</h3>
         <p>
