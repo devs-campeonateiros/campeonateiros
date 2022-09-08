@@ -7,20 +7,21 @@ export const DivModal = styled.div`
   justify-content: center;
 
   width: 100vw;
-  height: 110vh;
+  height: 100vh;
   left: 0;
   top: 0;
   z-index: 1;
 
   background-color: rgba(0, 0, 0, 0.8);
 `;
+
 export const DivInter = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  width: 20rem;
-  height: 30rem;
+  width: 18rem;
+  height: 32rem;
 
   background: #fefefe;
   border: 3px solid #ff7d00;
@@ -42,7 +43,7 @@ export const Divheader = styled.div`
   margin-bottom: 1rem;
   h2 {
     font-weight: 400;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 38px;
     color: #ffffff;
   }
@@ -60,53 +61,41 @@ export const FormEvent = styled.form`
   justify-content: center;
   align-items: flex-start;
 
-  gap: 2px;
+  gap: 4px;
   font-weight: 500;
-  font-size: 18px;
+
   color: black;
 
   p {
-    font-size: 12px;
     margin-left: 5px;
-  }
-  select {
-    width: 18rem;
-    height: 2rem;
-    padding-left: 2px;
-
-    border: 1.5px solid #ff7d00;
-    border-radius: 5px;
-  }
-  #userId {
-    display: none;
+    font-size: 12px;
   }
   input {
-    width: 18rem;
-    height: 2.2rem;
+    width: 16rem;
+    height: 2rem;
 
     background: #ffffff;
     border: 1.5px solid #ff7d00;
     border-radius: 5px;
-    font-size: 12px;
+    font-size: 14px;
     padding-left: 5px;
   }
   label {
     margin-left: 5px;
-    font-size: 12px;
+    font-size: 14px;
   }
   button {
-    position: fixed;
     align-self: center;
     border: none;
-    width: 7rem;
+    width: 10rem;
     height: 2rem;
 
-    margin-top: 25rem;
+    margin-top: 20px;
     background: #333333;
     border-radius: 100px;
 
     color: white;
-    font-size: 16px;
+    font-size: 14px;
   }
   button:hover {
     background-color: green;

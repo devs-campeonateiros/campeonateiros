@@ -8,31 +8,23 @@ export default createGlobalStyle`
     outline:0;
     box-sizing: border-box;
   }
-
   body,html{
     width: 100vw;
     height: 100vh;
-  }
+    }
+
 
   body {
-    background: var(--color-background);
     color: var(--color-text);
     -webkit-font-smoothing: antialiased;
 
-    overflow-x: hidden;
   }
-
   body, input, button, textarea {
-    font-family: 'Roboto';
-    font-size: 1.6rem;
+    font-family: 'Poppins';
   }
-
   button {
+    text-align: center;
     cursor: pointer;
-  }
-
-  ::-webkit-scrollbar {
-    width: 10px;
   }
 
   ::-webkit-scrollbar-track {
@@ -40,16 +32,13 @@ export default createGlobalStyle`
     margin: 1rem;
     border-radius: 1.6rem;
   }
-
   ::-webkit-scrollbar-thumb {
     background: var(--color-primary-dark);
     border-radius: 1.6rem;
   }
-
   ::-webkit-scrollbar-thumb:hover {
     background: var(--color-primary);
   }
-  .App {
-    background-color: black;
-  }
+
 `;
+
