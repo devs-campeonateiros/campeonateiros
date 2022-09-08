@@ -371,6 +371,9 @@ const Container = styled.div`
             font-size: 20px;
             width: 100%;
           }
+          p{
+            width: 100%;
+          }
 
           .subscription,
           .description,

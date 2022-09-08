@@ -1,13 +1,14 @@
 import { useEffect, useState, useContext } from "react";
 import { IEvent } from "../../context/GlobalInterfaces";
+import { useNavigate } from "react-router-dom";
+
 import { api } from "../../services/Api";
 import { Container } from "./styles";
-
 import fut from "../../assets/fut.png";
 import CompleteHeader from "../../components/CompleteHeader";
-import SimpleHeader from "../../components/simpleHeader";
 import { ModalEditUser } from "../../components/ModalEditUser";
 import { GlobalContext } from "../../context/GlobalContext";
+import ModalMoreInfo from "../../components/ModalMoreInfo";
 
 const Homepage = () => {
   const [eventsList, setEventsList] = useState<IEvent[]>([]);
@@ -15,7 +16,10 @@ const Homepage = () => {
 
   const token = localStorage.getItem("@Campeonateiros-token") || "";
 
-  const { editUserModal } = useContext(GlobalContext);
+  const { editUserModal, setEvent, setModalMoreInfo, modalMoreInfo } =
+    useContext(GlobalContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     api.get("/events").then((response) => {
@@ -36,7 +40,10 @@ const Homepage = () => {
           <div className="divImg">
             <img className="imgHomepage" src={fut} alt="" />
             <span>Venha fazer o seu campeonato com a gente!</span>
-            <button className="moreInfo">Mais Informações</button>
+
+            <button className="moreInfo" onClick={() => setModalMoreInfo(true)}>
+              Mais Informações
+            </button>
           </div>
 
           <div className="buttonsGroup">
@@ -76,10 +83,14 @@ const Homepage = () => {
               {eventsFiltered.length > 0
                 ? eventsFiltered?.map((event) => (
                     <li key={event.id} className="event">
-                      <img
-                        src="https://s3-alpha-sig.figma.com/img/fefb/9d2d/43f2984e48e3722d98526e2a46a53fca?Expires=1662940800&Signature=TOLF~NJl2mKt4aG3AHuB9DtWnD7Fpe06P-CwfwsQQGgJiBfXGbZAGrF9g6zuszcEgaGhwx6rrb15-a09CoDMSEVEvNFzld1dzZZTfpStxBlTLp~d5knMYbYMIDxIfCyPpzCkYjL1-AeElDjWKlyjd0-4eGLk9hYELeM4MUqOaYvwX3wDOR3RSeWT4-DZDiIUKu2Onps-NWD1a84iTpKUE105Hnplhnd-U2hYT1Es6OTol-MBWixJCVvVdmxAe10~eDWfDpxU-zUtR6IUmAlyWTdduTd9JTiayD18UsFI-2ZFovoWnGIHcFPaOj5MuZcXI~eaPbEQEQczRWNQ0EP~Vg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-                        alt={event.category}
-                      />
+                      {event.image ? (
+                        <img src={event.image} alt={event.category} />
+                      ) : (
+                        <img
+                          src="https://images.pexels.com/photos/7267588/pexels-photo-7267588.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                          alt={event.category}
+                        />
+                      )}
 
                       <div className="cardDescription">
                         <p className="eventDate">{event.dateStart}</p>
@@ -88,7 +99,10 @@ const Homepage = () => {
                       <div className="cardFooter">
                         <button
                           className="btnViewEvent"
-                          onClick={() => console.log(event.id)}
+                          onClick={() => {
+                            setEvent(event);
+                            navigate(`/events/${event.id}`);
+                          }}
                         >
                           Ver evento
                         </button>
@@ -97,10 +111,14 @@ const Homepage = () => {
                   ))
                 : eventsList.map((event) => (
                     <li key={event.id} className="event">
-                      <img
-                        src="https://s3-alpha-sig.figma.com/img/fefb/9d2d/43f2984e48e3722d98526e2a46a53fca?Expires=1662940800&Signature=TOLF~NJl2mKt4aG3AHuB9DtWnD7Fpe06P-CwfwsQQGgJiBfXGbZAGrF9g6zuszcEgaGhwx6rrb15-a09CoDMSEVEvNFzld1dzZZTfpStxBlTLp~d5knMYbYMIDxIfCyPpzCkYjL1-AeElDjWKlyjd0-4eGLk9hYELeM4MUqOaYvwX3wDOR3RSeWT4-DZDiIUKu2Onps-NWD1a84iTpKUE105Hnplhnd-U2hYT1Es6OTol-MBWixJCVvVdmxAe10~eDWfDpxU-zUtR6IUmAlyWTdduTd9JTiayD18UsFI-2ZFovoWnGIHcFPaOj5MuZcXI~eaPbEQEQczRWNQ0EP~Vg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"
-                        alt={event.category}
-                      />
+                      {event.image ? (
+                        <img src={event.image} alt={event.category} />
+                      ) : (
+                        <img
+                          src="https://images.pexels.com/photos/7267588/pexels-photo-7267588.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                          alt={event.category}
+                        />
+                      )}
 
                       <div className="cardDescription">
                         <p className="eventDate">{event.dateStart}</p>
@@ -109,7 +127,10 @@ const Homepage = () => {
                       <div className="cardFooter">
                         <button
                           className="btnViewEvent"
-                          onClick={() => console.log(event.id)}
+                          onClick={() => {
+                            setEvent(event);
+                            navigate(`/events/${event.id}`);
+                          }}
                         >
                           Ver evento
                         </button>
@@ -121,6 +142,7 @@ const Homepage = () => {
         </div>
 
         {editUserModal && <ModalEditUser />}
+        {modalMoreInfo && <ModalMoreInfo />}
       </Container>
     </>
   );

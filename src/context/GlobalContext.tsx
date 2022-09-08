@@ -29,6 +29,8 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
   const [modalConfirmDelete, setModalConfirmDelete] = useState<boolean>(false);
   const [modalConfirmInscription, setModalConfirmInscription] =
     useState<boolean>(false);
+  const [modalMoreInfo, setModalMoreInfo] = useState<boolean>(false);
+
   const navigate = useNavigate();
 
   const token = window.localStorage.getItem("@Campeonateiros-token");
@@ -42,7 +44,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
       listEvents();
       listUser();
     }
-  }, []);
+  }, [token, userId]);
 
   function registerUser(data: IUser) {
     api
@@ -165,17 +167,30 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
   }
 
   function confirmInscription() {
-    const team = {
-      name: user.name,
-      city: user.city,
-      url_image: user.url_image,
-      userId: user.id,
-    };
+    let data = {};
 
-    const newDatabase = [...[event.teams], team];
+    event.teams
+      ? event.teams.push({
+          name: user.name,
+          city: user.city,
+          url_image: user.url_image,
+          userId: user.id,
+        })
+      : (data = {
+          teams: [
+            {
+              name: user.name,
+              city: user.city,
+              url_image: user.url_image,
+              userId: user.id,
+            },
+          ],
+        });
+
+    event.teams && (data = { teams: event.teams });
 
     api
-      .patch(`/events/${event.id}`, newDatabase, {
+      .patch(`/events/${event.id}`, data, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(
@@ -255,6 +270,8 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
         modalConfirmInscription,
         setModalConfirmInscription,
         confirmInscription,
+        setModalMoreInfo,
+        modalMoreInfo,
       }}
     >
       {children}

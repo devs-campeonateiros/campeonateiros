@@ -1,37 +1,47 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import CompleteHeader from "../../components/CompleteHeader";
-import SimpleHeader from "../../components/simpleHeader";
+import { ModalConfirmInscription } from "../../components/ModalConfirmInscription";
+import { GlobalContext } from "../../context/GlobalContext";
 import { IEvent } from "../../context/GlobalInterfaces";
 import { api } from "../../services/Api";
 import { ContainerEvent } from "./styles";
 
 const EventPage = () => {
-  const token = localStorage.getItem("@Campeonateiros-token") || "";
+  const { id } = useParams();
+  const idNumber = Number(id);
 
   const [eventsList, setEventsList] = useState<IEvent[]>([]);
 
-  const { id } = useParams()
+  const {
+    setEvent,
+    modalConfirmInscription,
+    setModalConfirmInscription,
+    event,
+  } = useContext(GlobalContext);
 
-  const idNumber = Number(id)  
-  console.log(idNumber)
-  
   useEffect(() => {
     api.get("/events").then((response) => {
       setEventsList(response.data);
     });
   }, [setEventsList]);
-  
-  const evento = eventsList.find((elem) => elem.id === id)
-  console.log(evento)
+
+  const evento = eventsList.find((elem) => elem.id == id);
+
   return (
     <>
-      {token ? <CompleteHeader /> : <SimpleHeader />}
+      <CompleteHeader />
       <ContainerEvent>
         <div className="title">
-          {evento?.image ? <img src={evento.image} alt={evento.name}/> : <img src="https://cdn.discordapp.com/attachments/674032411092320324/1016808699341316146/unknown.png" alt="sua imagem"/>}
-          
-          
+          {evento?.image ? (
+            <img src={evento.image} alt={evento.name} />
+          ) : (
+            <img
+              src="https://cdn.discordapp.com/attachments/674032411092320324/1016808699341316146/unknown.png"
+              alt="sua imagem"
+            />
+          )}
+
           <h3>{evento?.name}</h3>
         </div>
         <div className="second">
@@ -39,8 +49,9 @@ const EventPage = () => {
             <span>Data - Dec 02/2021</span>
             <h3>Descrição:</h3>
             <p>
-              Campeonato de {evento?.category} em {evento?.localization} do dia {evento?.dateStart} ao dia {evento?.dateEnd} o valor de incrição é de {evento?.subscription} e a premiação será de {evento?.awards}
-              
+              Campeonato de {evento?.category} em {evento?.localization} do dia{" "}
+              {evento?.dateStart} ao dia {evento?.dateEnd} o valor de incrição é
+              de {evento?.subscription} e a premiação será de {evento?.awards}
             </p>
             <p>
               <b>Local:</b> {evento?.localization}
@@ -48,14 +59,28 @@ const EventPage = () => {
             <p>
               <b>Premiação:</b> {evento?.awards}
             </p>
+            {evento?.teams && (
+              <div>
+                <b>Times incritos:</b>
+                <p>{evento.teams.length}</p>
+              </div>
+            )}
           </div>
           <div className="value">
             <h3>Valor de Inscrição:</h3>
             <h3>{evento?.subscription}</h3>
-            <button>INSCREVA-SE</button>
+            <button
+              onClick={() => {
+                setEvent(evento!);
+                setModalConfirmInscription(true);
+              }}
+            >
+              INSCREVA-SE
+            </button>
           </div>
         </div>
       </ContainerEvent>
+      {modalConfirmInscription && <ModalConfirmInscription />}
     </>
   );
 };
