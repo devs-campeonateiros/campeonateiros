@@ -33,16 +33,20 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
 
   const navigate = useNavigate();
 
-  const token = window.localStorage.getItem("@Campeonateiros-token");
-  const userId = window.localStorage.getItem("@Campeonateiros-id");
+  const [token, setToken] = useState(
+    window.localStorage.getItem("@Campeonateiros-token") || ""
+  );
+
+  const userId = window.localStorage.getItem("@Campeonateiros-id") || "";
 
   useEffect(() => {
-    const userId = window.localStorage.getItem("@Campeonateiros-id");
+    const userId = window.localStorage.getItem("@Campeonateiros-id") || "";
 
-    if (userId !== null) {
+    if (userId !== "") {
       listUsers();
       listEvents();
       listUser();
+      api.defaults.headers.common.authorization = `Bearer ${token}`;
     }
   }, [token, userId]);
 
@@ -70,7 +74,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
           "@Campeonateiros-id",
           JSON.stringify(userResponse.id)
         );
-
+        setToken(token);
         setUser(res.data.user);
         api.defaults.headers.common.authorization = `Bearer ${token}`;
         toast.success("Login Feito com sucesso!");
@@ -84,13 +88,10 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
 
   function createEvent(data: IEvent) {
     const userId = window.localStorage.getItem("@Campeonateiros-id");
-    const token = window.localStorage.getItem("@Campeonateiros-token");
     const dataEvent = { ...data, userId };
 
     api
-      .post("/events", dataEvent, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post("/events", dataEvent)
       .then((res) => {
         toast.success("Evento criado com sucesso!", {
           theme: "dark",
@@ -134,9 +135,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
 
   function editEvent(data: IEditEvent) {
     api
-      .patch(`/events/${event.id}`, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .patch(`/events/${event.id}`, data)
       .then((res) => {
         toast.success("Evento atualizado!!", {
           theme: "dark",
@@ -152,9 +151,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
 
   function editUser(data: IEditUser) {
     api
-      .patch(`/users/${user.id}`, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .patch(`/users/${user.id}`, data)
       .then((res) => {
         toast.success("Usuário atualizado!!");
         setUser(res.data);
@@ -190,9 +187,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
     event.teams && (data = { teams: event.teams });
 
     api
-      .patch(`/events/${event.id}`, data, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .patch(`/events/${event.id}`, data)
       .then(
         () => (
           toast.success("incrição feita com Sucesso!", {
@@ -208,9 +203,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
 
   function deleteEvent() {
     api
-      .delete(`/events/${event.id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .delete(`/events/${event.id}`)
       .then(() => {
         toast.success("Evento deletado!", {
           theme: "dark",
@@ -225,9 +218,7 @@ export const GlobalProvider = ({ children }: IAuthProviderProps) => {
 
   function deleteUser() {
     api
-      .delete(`/users/${user.id}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .delete(`/users/${user.id}`)
       .then(() => {
         toast.success("Usuário deletado!");
         setUsers(users.filter((elem) => elem.id !== user.id));
