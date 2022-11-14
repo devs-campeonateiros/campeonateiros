@@ -6,7 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 import { ContainerLogin } from "./styles";
 import { GlobalContext } from "../../context/GlobalContext";
-import SimpleHeader from "../../components/simpleHeader";
 import { IUserDate } from "./Interfaces";
 import CompleteHeader from "../../components/CompleteHeader";
 
